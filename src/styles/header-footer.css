@@ -61,16 +61,6 @@ header p {
   max-width: 2rem;
 }
 
-header button {
-  width: 100%;
-  background-color: var(--button-std);
-  color: var(--text-color);
-  font-weight: 600;
-  border-radius: 0.5rem;
-  min-height: 2rem;
-  padding: 0.5rem;
-}
-
 .show {
   display: block;
   position: absolute;

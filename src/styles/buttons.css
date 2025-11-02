@@ -1,3 +1,13 @@
+.menu-button {
+  width: 100%;
+  background-color: var(--button-std);
+  color: var(--text-color);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  min-height: 2rem;
+  padding: 0.5rem;
+}
+
 .book-button {
   width: fit-content;
   padding: 1rem;
@@ -6,4 +16,21 @@
   font-weight: 600;
   border-radius: 1rem;
   margin: 1rem;
+}
+
+.book-event {
+  background-color: var(--button-std);
+  color: var(--text-color);
+  font-size: large;
+  font-weight: 600;
+  border-radius: 1rem;
+  margin: 1rem;
+  margin: 0;
+  width: 5rem;
+}
+
+button:hover {
+  border: 1px solid var(--special-color);
+  color: var(--special-color);
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import classNames from "classnames";
 import foxyEckoesLogo from "../assets/logos/F-E-logo-title.png";
 import { Hamburger } from "../assets/svg/hamburgerMenu";
 import "../styles/header-footer.css";
+import "../styles/buttons.css";
 import { useState } from "react";
 
 export function Header() {
@@ -24,13 +25,13 @@ export function Header() {
       </div>
       <ul className={classNames("menu-bar", { show })}>
         <li>
-          <button>Login</button>
+          <button className="menu-button">Login</button>
         </li>
         <li>
-          <button>Event</button>
+          <button className="menu-button">Event</button>
         </li>
         <li>
-          <button>About</button>
+          <button className="menu-button">About</button>
         </li>
       </ul>
     </header>
