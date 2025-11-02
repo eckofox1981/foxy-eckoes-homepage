@@ -93,6 +93,10 @@ header p {
     max-height: 6rem;
     width: 6rem;
   }
+
+  header p {
+    font-size: 1.25rem;
+  }
 }
 
 @media only screen and (min-width: 1080px) {
@@ -106,5 +110,9 @@ header p {
   header img {
     max-height: 10rem;
     width: 10rem;
+  }
+
+  header p {
+    font-size: 1.5rem;
   }
 }
