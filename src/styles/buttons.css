@@ -1,0 +1,9 @@
+.book-button {
+  width: fit-content;
+  padding: 1rem;
+  color: var(--text-color);
+  font-size: large;
+  font-weight: 600;
+  border-radius: 1rem;
+  margin: 1rem;
+}

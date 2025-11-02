@@ -22,7 +22,7 @@ export function Header() {
       <div onClick={showMenu}>
         <Hamburger />
       </div>
-      <ul className={classNames("menuBar", { show })}>
+      <ul className={classNames("menu-bar", { show })}>
         <li>
           <button>Login</button>
         </li>

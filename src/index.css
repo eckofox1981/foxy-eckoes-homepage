@@ -2,7 +2,7 @@
   --text-color: hsl(0, 0%, 90%);
   --background-primary: hsl(0, 0%, 10%);
   --accent-color: hsl(192, 70%, 43%);
-  --contrast-color: hsl(227, 100%, 52%);
+  --text-backround-color: hsla(200, 94%, 14%, 0.5);
   --special-color: rgb(255, 106, 0);
   --placeholder-color: hsl(0, 0%, 15%);
   --placeholder-background: hsl(0, 0%, 20%);
@@ -15,4 +15,8 @@
   height: 100vh;
   background-color: var(--background-primary);
   color: var(--text-color);
+}
+
+body {
+  margin: 0;
 }

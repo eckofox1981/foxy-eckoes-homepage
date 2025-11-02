@@ -16,7 +16,7 @@ footer {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 5rem;
+  height: 3rem;
   background-color: var(--accent-color);
   padding-left: 1rem;
   padding-right: 1rem;
@@ -24,30 +24,35 @@ footer {
   padding-bottom: 0.5rem;
 }
 
-a {
+footer a {
   color: var(--button-std);
   text-decoration: none;
   font-weight: 600;
 }
 
-img {
+header img {
   max-height: 4.5rem;
   width: 4rem;
 }
 
-p {
+footer img {
+  max-height: 3rem;
+  width: 3rem;
+}
+
+header p {
   font-size: 1rem;
   text-align: center;
   font-weight: bold;
 }
 
-.menuBar {
+.menu-bar {
   list-style: none;
   display: none;
   padding: 0;
 }
 
-li {
+.menu-bar li {
   margin: 0.25rem;
 }
 #hamburger {
@@ -56,7 +61,7 @@ li {
   max-width: 2rem;
 }
 
-button {
+header button {
   width: 100%;
   background-color: var(--button-std);
   color: var(--text-color);
@@ -84,7 +89,7 @@ button {
 }
 
 @media only screen and (min-width: 780px) {
-  .menuBar {
+  .menu-bar {
     display: flex;
   }
 
