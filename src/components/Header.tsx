@@ -25,13 +25,18 @@ export function Header() {
       </div>
       <ul className={classNames("menu-bar", { show })}>
         <li>
-          <button className="menu-button">Login</button>
+          <a href="/login">
+            <button className="menu-button">Login</button>
+          </a>
         </li>
+
         <li>
           <button className="menu-button">Event</button>
         </li>
         <li>
-          <button className="menu-button">About</button>
+          <a href="/#">
+            <button className="menu-button">About</button>
+          </a>
         </li>
       </ul>
     </header>
