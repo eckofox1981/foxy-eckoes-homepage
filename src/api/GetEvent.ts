@@ -5,6 +5,9 @@ export async function getAllEvents() {
   try {
     const response = await fetch(GET_ALL_EVENT_URL, {
       method: "GET",
+      headers: {
+        CORS: "Access-control-Allow-Origin",
+      },
     });
 
     if (!response.ok) {

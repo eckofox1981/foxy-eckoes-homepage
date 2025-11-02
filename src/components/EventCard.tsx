@@ -2,28 +2,17 @@ import { Event } from "../models/Event";
 import "../styles/buttons.css";
 import "../styles/event-card.css";
 
-export function EventCard() {
-  const fillerEvent = new Event(
-    "QQQQ-1234-ZZZ-4567",
-    new Date(),
-    "Metallica",
-    "Heavy metal legends deliver an explosive evening of thrash metal classics and new material from their 72 Seasons album.",
-    "Telenor Arena, Oslo, Norway",
-    "https://contentf5.dailynewshungary.com/wp-content/uploads/2025/06/metallica-concert.jpg",
-    ["metal", "heavy metal", "thrash metal", "Metallica", "Oslo", "Norway"],
-    23000,
-    23000,
-    0
-  );
+export function EventCard({ show }: { show: Event }) {
+  const eventDate = new Date(show.date);
 
   return (
     <article className="event-card">
-      <img src={fillerEvent.pictureUrl} alt={fillerEvent.performer} />
+      <img src={show.pictureUrl} alt={show.performer} />
       <div className="details">
         <div className="info">
-          <h2>{fillerEvent.performer}</h2>
-          <h3>Live at {fillerEvent.location}</h3>
-          <h4>{fillerEvent.date.toDateString()}</h4>
+          <h2>{show.performer}</h2>
+          <h3>Live at {show.location}</h3>
+          <h4>{eventDate.toDateString()}</h4>
         </div>
         <button className="book-event">Book Event</button>
       </div>
