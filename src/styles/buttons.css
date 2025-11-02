@@ -1,5 +1,5 @@
 .menu-button {
-  width: 100%;
+  width: 5rem;
   background-color: var(--button-std);
   color: var(--text-color);
   font-weight: 600;
@@ -33,4 +33,11 @@ button:hover {
   border: 1px solid var(--special-color);
   color: var(--special-color);
   cursor: pointer;
+}
+
+@media only screen and (min-width: 780px) {
+  .menu-button {
+    height: 3rem;
+    font-size: 1rem;
+  }
 }

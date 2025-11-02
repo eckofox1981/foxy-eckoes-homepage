@@ -44,6 +44,8 @@ header p {
   font-size: 1rem;
   text-align: center;
   font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .menu-bar {
@@ -85,5 +87,24 @@ header p {
 
   #hamburger {
     display: none;
+  }
+
+  header img {
+    max-height: 6rem;
+    width: 6rem;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  header {
+    justify-content: space-around;
+    height: 10rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+
+  header img {
+    max-height: 10rem;
+    width: 10rem;
   }
 }
