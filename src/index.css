@@ -1,2 +1,18 @@
 :root {
+  --text-color: hsl(0, 0%, 90%);
+  --background-primary: hsl(0, 0%, 10%);
+  --accent-color: hsl(192, 70%, 43%);
+  --contrast-color: hsl(227, 100%, 52%);
+  --special-color: rgb(255, 106, 0);
+  --placeholder-color: hsl(0, 0%, 15%);
+  --placeholder-background: hsl(0, 0%, 20%);
+  --button-std: hsl(200, 94%, 14%);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--background-primary);
+  color: var(--text-color);
 }
