@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { LoginPage } from "./pages/Login";
 import { EventPage } from "./pages/Event";
+import { AccountPage } from "./pages/Account";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/event/:id" element={<EventPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
