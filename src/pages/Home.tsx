@@ -6,9 +6,7 @@ import { getAllEvents } from "../api/GetEvent";
 import { Event } from "../models/Event";
 
 export function Home() {
-  const [events, setEvents] = useState<Event[]>([
-    new Event("", new Date(), "", "", "", "", [""], 0, 0, 0),
-  ]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
     const getEvents = async () => {
