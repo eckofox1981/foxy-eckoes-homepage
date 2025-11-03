@@ -28,6 +28,23 @@
   margin: 0;
   width: 5rem;
 }
+.book-event-page {
+  width: fit-content;
+  text-align: center;
+  background-color: var(--special-color);
+  height: 3rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 1rem;
+  padding: 5px;
+}
+
+.book-event-page:hover {
+  border: 1px solid var(--button-std);
+  color: var(--button-std);
+}
 
 button:hover {
   border: 1px solid var(--special-color);

@@ -1,0 +1,74 @@
+.event-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-section {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-section > h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.event-section > h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.event-section > img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.event-section > p {
+  width: 90%;
+  font-size: 1.25rem;
+  background-color: var(--button-std);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.location-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: center;
+  margin: 1 rem;
+}
+
+.location-section > button {
+  align-self: center;
+}
+
+.location-section > span {
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  font-size: 1.5rem;
+}
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
+
+@media only screen and (min-width: 780px) {
+  .event-section {
+    max-width: 780px;
+    object-fit: contain;
+  }
+}

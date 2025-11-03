@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Event } from "../models/Event";
 import "../styles/buttons.css";
 import "../styles/event-card.css";
@@ -14,7 +15,9 @@ export function EventCard({ show }: { show: Event }) {
           <h3>Live at {show.location}</h3>
           <h4>{eventDate.toDateString()}</h4>
         </div>
-        <button className="book-event">Book Event</button>
+        <Link to={`/event/${show.eventId}`}>
+          <button className="book-event">Book Event</button>
+        </Link>
       </div>
     </article>
   );

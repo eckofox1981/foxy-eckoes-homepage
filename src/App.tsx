@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Home } from "./pages/Home";
 import { LoginPage } from "./pages/Login";
+import { EventPage } from "./pages/Event";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/event/:id" element={<EventPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
