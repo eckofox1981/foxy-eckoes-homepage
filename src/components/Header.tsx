@@ -5,7 +5,6 @@ import "../styles/header-footer.css";
 import "../styles/buttons.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getToken } from "../localstorage/Token";
 import { useLoginBtnStore } from "../store/LoginBtnStore";
 
 export function Header() {
@@ -21,10 +20,12 @@ export function Header() {
   };
 
   const loginButton = () => {
+    console.log(loginBtn.text);
+
     return (
-      <a href={loginBtn.link}>
+      <Link to={loginBtn.link}>
         <button className="menu-button">{loginBtn.text}</button>
-      </a>
+      </Link>
     );
   };
 
@@ -45,12 +46,14 @@ export function Header() {
         <li>{loginButton()}</li>
 
         <li>
-          <button className="menu-button">Event</button>
+          <Link to={"/"}>
+            <button className="menu-button">Event</button>
+          </Link>
         </li>
         <li>
-          <a href="/#">
+          <Link to={"/"}>
             <button className="menu-button">About</button>
-          </a>
+          </Link>
         </li>
       </ul>
     </header>
