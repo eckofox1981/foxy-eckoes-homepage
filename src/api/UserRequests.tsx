@@ -1,5 +1,6 @@
+import { setToken } from "../localstorage/Token";
 import { User } from "../models/User";
-import { GET_USER_INFO_URL, LOGIN_URL } from "./API_URLS";
+import { GET_USER_INFO_URL, LOGIN_URL, REGISTER_USER_URL } from "./API_URLS";
 
 export async function login(username: string, password: string) {
   const userPassDTO: any = {
@@ -52,6 +53,45 @@ export async function getUser(jwtToken: string) {
       json.role,
       json.openIdProvider
     );
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function registerUser(
+  user: User,
+  password: string,
+  passwordConfirm: string
+) {
+  const userCreateDTO = {
+    username: user.username,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    password: password,
+    passwordConfirm: passwordConfirm,
+  };
+
+  try {
+    const response = await fetch(REGISTER_USER_URL, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userCreateDTO),
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const jwtToken: string = await login(
+      userCreateDTO.username,
+      userCreateDTO.password
+    );
+    setToken(jwtToken);
+    return "Registration completed, you are being directed to your account page.";
   } catch (error: any) {
     throw new Error(error.message);
   }

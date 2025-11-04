@@ -4,7 +4,7 @@ import foxyEckoesLogo from "../assets/logos/F-E-logo-title.png";
 import { useState } from "react";
 import { User } from "../models/User";
 import classNames from "classnames";
-import { getUser, login } from "../api/UserRequests";
+import { getUser, login, registerUser } from "../api/UserRequests";
 import { setToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
 import { useLoginBtnStore } from "../store/loginBtnStore";
@@ -34,7 +34,7 @@ export function LoginPage() {
     }
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const user: User = new User(
       "",
       usernameRegister,
@@ -52,7 +52,14 @@ export function LoginPage() {
     );
     setMessage(ifMessage);
     if (ifMessage.length === 0) {
-      console.log("You'd register");
+      try {
+        const successMsg = await registerUser(user, password, confirm);
+        alert(successMsg);
+        setLoginBtnToAccount();
+        navigate("/account");
+      } catch (error: any) {
+        alert("Error creating user: " + error.message);
+      }
     }
   };
 
