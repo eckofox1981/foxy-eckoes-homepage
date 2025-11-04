@@ -7,23 +7,56 @@ import { useParams } from "react-router-dom";
 import { getEventById } from "../api/GetEvent";
 import { Bars } from "react-loader-spinner";
 import { Toast } from "../components/modals/Toast";
+import { convertDate } from "../utility/DateUtility";
+import type { Booking } from "../models/Booking";
+import { bookEvent } from "../api/BookingRequests";
+import { useToastStore } from "../store/ToastStore";
 
 export function EventPage() {
   const eventId: string | undefined = useParams().id;
   const [event, setEvent] = useState<Event | null>(null);
-  useEffect(() => {
-    const fetchEvent = async () => {
-      const response: any = await getEventById(eventId);
-      return response;
-    };
+  const showToast = useToastStore((store) => store.showToast);
 
+  const fetchEvent = async () => {
+    const response: any = await getEventById(eventId);
+    return response;
+  };
+
+  useEffect(() => {
     fetchEvent().then(setEvent);
   }, []);
 
   const [msgStatus, setMsgStatus] = useState<string>("hidden");
   const [message, setMessage] = useState<string>("");
 
-  const eventDate: Date = event ? new Date(event.date) : new Date();
+  const handleBooking = async () => {
+    let message: string;
+    try {
+      if (!event) return;
+
+      const ticketString = prompt("How many tickets do you want?", "1");
+      const tickets: number = ticketString ? Number.parseInt(ticketString) : 0;
+
+      if (tickets < 1)
+        throw Error("You need to enter a valid number of tickets.");
+
+      const booking: Booking = await bookEvent(event?.eventId, tickets);
+      message =
+        "You've booked " +
+        booking.numberOfTickets +
+        " tickets for " +
+        booking.event.performer +
+        ".<br/> See you on the " +
+        convertDate(booking.event.date) +
+        "<br/> at " +
+        booking.event.location +
+        "!";
+      fetchEvent().then(setEvent);
+      showToast("STATUS:" + booking.status, message, "green");
+    } catch (error: any) {
+      showToast("Error while booking event", error.message, "red");
+    }
+  };
 
   return (
     <main className="event-main">
@@ -41,7 +74,7 @@ export function EventPage() {
         <>
           <section className="event-section">
             <h2>{event.performer}</h2>
-            <h3>{eventDate.toDateString()}</h3>
+            <h3>{convertDate(event.date)}</h3>
             <img src={event.pictureUrl} alt={event.performer} />
             <p>{event.description}</p>
           </section>
@@ -56,13 +89,7 @@ export function EventPage() {
             <span>
               <b>Bookings made:</b> {event.numberOfBookings}
             </span>
-            <button
-              className="book-event-page"
-              onClick={() => {
-                setMessage("Booking confirmed!");
-                setMsgStatus("success");
-              }}
-            >
+            <button className="book-event-page" onClick={handleBooking}>
               Book {event.performer}
             </button>
           </section>

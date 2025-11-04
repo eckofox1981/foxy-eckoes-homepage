@@ -9,19 +9,25 @@ import { useNavigate } from "react-router-dom";
 import { UserBookings } from "../components/UserBookings";
 import { AdminControls } from "../components/AdminControls";
 import { useLoginBtnStore } from "../store/LoginBtnStore";
+import { useToastStore } from "../store/ToastStore";
 
 export function AccountPage() {
   const [user, setUser] = useState<User | null>(null);
   const setLoginBtnToLogin = useLoginBtnStore((store) => store.setToLogin);
+  const showToast = useToastStore((store) => store.showToast);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
       const token: string | undefined = getToken();
       if (token === undefined) {
+        setLoginBtnToLogin();
+        showToast(
+          "Not Logged In",
+          "You cannot access your account page unless you login.",
+          "var(--special-color)"
+        );
         navigate("/login");
-        //todo: toast?
-        console.log("not logged in");
 
         return;
       }
