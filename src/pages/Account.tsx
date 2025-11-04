@@ -8,7 +8,7 @@ import { deleteToken, getToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
 import { UserBookings } from "../components/UserBookings";
 import { AdminControls } from "../components/AdminControls";
-import { useLoginBtnStore } from "../store/loginBtnStore";
+import { useLoginBtnStore } from "../store/LoginBtnStore";
 
 export function AccountPage() {
   const [user, setUser] = useState<User | null>(null);

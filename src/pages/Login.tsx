@@ -7,7 +7,8 @@ import classNames from "classnames";
 import { getUser, login, registerUser } from "../api/UserRequests";
 import { setToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
-import { useLoginBtnStore } from "../store/loginBtnStore";
+import { useLoginBtnStore } from "../store/LoginBtnStore";
+import { useToastStore } from "../store/ToastStore";
 
 export function LoginPage() {
   const [username, setUsername] = useState<string>("");
@@ -21,6 +22,7 @@ export function LoginPage() {
   const [message, setMessage] = useState<string[]>([]);
   const navigate = useNavigate();
   const setLoginBtnToAccount = useLoginBtnStore((store) => store.setToAccount);
+  const showToast = useToastStore((store) => store.showToast);
 
   const handleLogin = async () => {
     try {
@@ -29,7 +31,7 @@ export function LoginPage() {
       setLoginBtnToAccount();
       navigate("/account");
     } catch (e: any) {
-      //todo show toast
+      showToast("Could not log in", e.message, "var(--special-color)");
       console.log(e.message);
     }
   };
@@ -58,7 +60,11 @@ export function LoginPage() {
         setLoginBtnToAccount();
         navigate("/account");
       } catch (error: any) {
-        alert("Error creating user: " + error.message);
+        showToast(
+          "Error creating user:",
+          error.message,
+          "var(--special-color)"
+        );
       }
     }
   };
@@ -87,7 +93,7 @@ export function LoginPage() {
               id="username"
               type="text"
               placeholder="username"
-              onChange={() => setUsername(event?.target?.value || "")}
+              onChange={(event) => setUsername(event?.target?.value || "")}
             />
           </div>
           <div className="form-field">
@@ -96,7 +102,7 @@ export function LoginPage() {
               id="password"
               type="password"
               placeholder="password"
-              onChange={() => setPassword(event?.target?.value || "")}
+              onChange={(event) => setPassword(event.target?.value || "")}
             />
           </div>
         </form>
@@ -125,8 +131,8 @@ export function LoginPage() {
               id="passwordRegister"
               type="password"
               placeholder="password"
-              onChange={() => {
-                setPasswordRegister(event?.target?.value || "");
+              onChange={(event) => {
+                setPasswordRegister(event.target?.value || "");
               }}
             />
           </div>{" "}
@@ -136,8 +142,8 @@ export function LoginPage() {
               id="password-confirmRegister"
               type="password"
               placeholder="confirm password"
-              onChange={() => {
-                setConfirm(event?.target?.value || "");
+              onChange={(event) => {
+                setConfirm(event.target?.value || "");
               }}
             />
           </div>{" "}
@@ -147,8 +153,8 @@ export function LoginPage() {
               id="firstname"
               type="text"
               placeholder="John"
-              onChange={() => {
-                setFirstName(event?.target?.value || "");
+              onChange={(event) => {
+                setFirstName(event.target?.value || "");
               }}
             />
           </div>{" "}
@@ -158,8 +164,8 @@ export function LoginPage() {
               id="lastname"
               type="text"
               placeholder="Doe"
-              onChange={() => {
-                setLastName(event?.target?.value || "");
+              onChange={(event) => {
+                setLastName(event.target?.value || "");
               }}
             />
           </div>{" "}
@@ -169,7 +175,7 @@ export function LoginPage() {
               id="email"
               type="text"
               placeholder="john.doe@example.com"
-              onChange={() => setEmail(event?.target?.value || "")}
+              onChange={(event) => setEmail(event.target?.value || "")}
             />
           </div>
         </form>

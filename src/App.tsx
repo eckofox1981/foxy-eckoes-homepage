@@ -6,6 +6,7 @@ import { Home } from "./pages/Home";
 import { LoginPage } from "./pages/Login";
 import { EventPage } from "./pages/Event";
 import { AccountPage } from "./pages/Account";
+import { Toast } from "./components/modals/Toast";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
         </Routes>
         <Footer />
+        <Toast />
       </BrowserRouter>
     </>
   );

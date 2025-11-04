@@ -6,6 +6,7 @@ import "../styles/event-page.css";
 import { useParams } from "react-router-dom";
 import { getEventById } from "../api/GetEvent";
 import { Bars } from "react-loader-spinner";
+import { Toast } from "../components/modals/Toast";
 
 export function EventPage() {
   const eventId: string | undefined = useParams().id;

@@ -6,7 +6,7 @@ import "../styles/buttons.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getToken } from "../localstorage/Token";
-import { useLoginBtnStore } from "../store/loginBtnStore";
+import { useLoginBtnStore } from "../store/LoginBtnStore";
 
 export function Header() {
   const [show, setShow] = useState("");
