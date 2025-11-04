@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { Event } from "../models/Event";
 import "../styles/buttons.css";
 import "../styles/event-card.css";
+import { convertDate } from "../utility/DateUtility";
 
 export function EventCard({ show }: { show: Event }) {
-  const eventDate = new Date(show.date);
+  const eventDate: string = show ? convertDate(show?.date) : "";
 
   return (
     <article className="event-card">
@@ -13,7 +14,7 @@ export function EventCard({ show }: { show: Event }) {
         <div className="info">
           <h2>{show.performer}</h2>
           <h3>Live at {show.location}</h3>
-          <h4>{eventDate.toDateString()}</h4>
+          <h4>{eventDate}</h4>
         </div>
         <Link to={`/event/${show.eventId}`}>
           <button className="book-event">Book Event</button>
