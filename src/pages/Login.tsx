@@ -7,6 +7,7 @@ import classNames from "classnames";
 import { getUser, login } from "../api/UserRequests";
 import { setToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
+import { useLoginBtnStore } from "../store/loginBtnStore";
 
 export function LoginPage() {
   const [username, setUsername] = useState<string>("");
@@ -19,11 +20,13 @@ export function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string[]>([]);
   const navigate = useNavigate();
+  const setLoginBtnToAccount = useLoginBtnStore((store) => store.setToAccount);
 
   const handleLogin = async () => {
     try {
       const jwtToken = await login(username, password);
       setToken(jwtToken);
+      setLoginBtnToAccount();
       navigate("/account");
     } catch (e: any) {
       //todo show toast

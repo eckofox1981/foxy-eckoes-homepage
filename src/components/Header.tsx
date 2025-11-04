@@ -5,10 +5,12 @@ import "../styles/header-footer.css";
 import "../styles/buttons.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getToken } from "../localstorage/Token";
+import { useLoginBtnStore } from "../store/loginBtnStore";
 
 export function Header() {
   const [show, setShow] = useState("");
-  const [loginButton, setLoginButton] = useState<string>("Login");
+  const loginBtn = useLoginBtnStore((store) => store.loginBtn);
 
   const showMenu = () => {
     if (show === "") {
@@ -17,6 +19,18 @@ export function Header() {
       setShow("");
     }
   };
+
+  const loginButton = () => {
+    return (
+      <a href={loginBtn.link}>
+        <button className="menu-button">{loginBtn.text}</button>
+      </a>
+    );
+  };
+
+  useEffect(() => {
+    loginButton();
+  }, [loginBtn]);
 
   return (
     <header>
@@ -28,11 +42,7 @@ export function Header() {
         <Hamburger />
       </div>
       <ul className={classNames("menu-bar", { show })}>
-        <li>
-          <a href="/login">
-            <button className="menu-button">{loginButton}</button>
-          </a>
-        </li>
+        <li>{loginButton()}</li>
 
         <li>
           <button className="menu-button">Event</button>

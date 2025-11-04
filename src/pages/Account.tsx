@@ -4,24 +4,17 @@ import "../styles/account.css";
 import { Bars } from "react-loader-spinner";
 import { useEffect, useState } from "react";
 import { getUser } from "../api/UserRequests";
-import { getToken } from "../localstorage/Token";
+import { deleteToken, getToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
 import { UserBookings } from "../components/UserBookings";
 import { AdminControls } from "../components/AdminControls";
+import { useLoginBtnStore } from "../store/loginBtnStore";
 
 export function AccountPage() {
-  /*   const user = new User(
-    "1234-abcd-4567-QWERT",
-    "president",
-    "Richard",
-    "Nixon",
-    "dick-nixon@white-house-gov",
-    [],
-    "user",
-    ""
-  ); */
   const [user, setUser] = useState<User | null>(null);
+  const setLoginBtnToLogin = useLoginBtnStore((store) => store.setToLogin);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchUser = async () => {
       const token: string | undefined = getToken();
@@ -38,6 +31,16 @@ export function AccountPage() {
 
     fetchUser();
   }, []);
+
+  const handleLogOut = () => {
+    if (confirm("Are you sure you want to log out?")) {
+      deleteToken();
+      setLoginBtnToLogin();
+      navigate("/");
+    } else {
+      return;
+    }
+  };
 
   return (
     <main>
@@ -72,7 +75,16 @@ export function AccountPage() {
                 <p>{user.email}</p>
               </div>
             </div>
-            <button className="menu-button">Edit</button>
+            <div>
+              <button className="menu-button">Edit</button> <br />
+              <button
+                className="cancel-button"
+                style={{ height: "3rem", fontSize: "1.25rem" }}
+                onClick={handleLogOut}
+              >
+                Logout
+              </button>
+            </div>
           </section>
           <section className="user-bookings">
             <UserBookings bookings={user.bookings} />
