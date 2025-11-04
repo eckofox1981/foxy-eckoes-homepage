@@ -4,6 +4,7 @@ import { Hamburger } from "../assets/svg/hamburgerMenu";
 import "../styles/header-footer.css";
 import "../styles/buttons.css";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function Header() {
   const [show, setShow] = useState("");
@@ -19,7 +20,9 @@ export function Header() {
 
   return (
     <header>
-      <img src={foxyEckoesLogo} alt="Foxy Eckoes logo" />
+      <Link to="/">
+        <img src={foxyEckoesLogo} alt="Foxy Eckoes logo" />
+      </Link>
       <p>Book your next entertainment event!</p>
       <div onClick={showMenu}>
         <Hamburger />
