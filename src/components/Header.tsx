@@ -3,10 +3,11 @@ import foxyEckoesLogo from "../assets/logos/F-E-logo-title.png";
 import { Hamburger } from "../assets/svg/hamburgerMenu";
 import "../styles/header-footer.css";
 import "../styles/buttons.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const [show, setShow] = useState("");
+  const [loginButton, setLoginButton] = useState<string>("Login");
 
   const showMenu = () => {
     if (show === "") {
@@ -26,7 +27,7 @@ export function Header() {
       <ul className={classNames("menu-bar", { show })}>
         <li>
           <a href="/login">
-            <button className="menu-button">Login</button>
+            <button className="menu-button">{loginButton}</button>
           </a>
         </li>
 

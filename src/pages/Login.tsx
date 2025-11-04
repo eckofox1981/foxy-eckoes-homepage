@@ -4,6 +4,9 @@ import foxyEckoesLogo from "../assets/logos/F-E-logo-title.png";
 import { useState } from "react";
 import { User } from "../models/User";
 import classNames from "classnames";
+import { getUser, login } from "../api/UserRequests";
+import { setToken } from "../localstorage/Token";
+import { useNavigate } from "react-router-dom";
 
 export function LoginPage() {
   const [username, setUsername] = useState<string>("");
@@ -15,6 +18,18 @@ export function LoginPage() {
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string[]>([]);
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const jwtToken = await login(username, password);
+      setToken(jwtToken);
+      navigate("/account");
+    } catch (e: any) {
+      //todo show toast
+      console.log(e.message);
+    }
+  };
 
   const handleRegister = () => {
     const user: User = new User(
@@ -75,7 +90,9 @@ export function LoginPage() {
             />
           </div>
         </form>
-        <button className="menu-button">Login</button>
+        <button className="menu-button" onClick={handleLogin}>
+          Login
+        </button>
       </section>
       <section className="login-section">
         <h3>
