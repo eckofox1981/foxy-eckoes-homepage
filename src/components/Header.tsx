@@ -6,10 +6,13 @@ import "../styles/buttons.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoginBtnStore } from "../store/LoginBtnStore";
+import { getToken } from "../localstorage/Token";
 
 export function Header() {
   const [show, setShow] = useState("");
   const loginBtn = useLoginBtnStore((store) => store.loginBtn);
+  const setLoginBtnToAccount = useLoginBtnStore((store) => store.setToAccount);
+  const setLoginBtnToLogin = useLoginBtnStore((store) => store.setToLogin);
 
   const showMenu = () => {
     if (show === "") {
@@ -30,6 +33,14 @@ export function Header() {
   useEffect(() => {
     loginButton();
   }, [loginBtn]);
+
+  useEffect(() => {
+    if (getToken() === undefined) {
+      setLoginBtnToLogin();
+    } else {
+      setLoginBtnToAccount();
+    }
+  }, []);
 
   return (
     <header>

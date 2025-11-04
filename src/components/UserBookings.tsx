@@ -3,7 +3,7 @@ import type { Booking } from "../models/Booking";
 import "../styles/buttons.css";
 import "../styles/user-bookings.css";
 import { convertDate } from "../utility/DateUtility";
-import { cancelBooking } from "../api/BookingRequests";
+import { cancelBooking, updateBooking } from "../api/BookingRequests";
 import { useToastStore } from "../store/ToastStore";
 
 export function UserBookings({
@@ -35,6 +35,31 @@ export function UserBookings({
     }
   };
 
+  const handleUpdate = async (bookingID: string) => {
+    try {
+      const ticketString = prompt("How many tickets do you want?", "1");
+      const tickets: number = ticketString ? Number.parseInt(ticketString) : 0;
+
+      if (tickets < 1)
+        throw Error("You need to enter a valid number of tickets.");
+
+      const booking: Booking = await updateBooking(bookingID, tickets);
+
+      showToast(
+        "Booking updated:",
+        "Your booking for " +
+          booking.event.performer +
+          " on the " +
+          convertDate(booking.event.date) +
+          "has been updated",
+        "green"
+      );
+      reloadUser();
+    } catch (error: any) {
+      showToast("ERROR WHILE UPDATING EVENT", error.message, "red");
+    }
+  };
+
   return bookings === undefined || bookings.length === 0 ? (
     <i>You have no events booked.</i>
   ) : (
@@ -60,7 +85,26 @@ export function UserBookings({
               <p>Status:</p>
               {status(b.status)}
             </div>
-            <button className="update-button">Update</button>
+            {b.status !== "CANCELLED" ? (
+              <button
+                className="update-button"
+                onClick={() => {
+                  handleUpdate(b.bookingId);
+                }}
+              >
+                Update
+              </button>
+            ) : (
+              <button
+                className="update-button"
+                style={{
+                  textDecoration: "line-through",
+                  backgroundColor: "var(--backgroun-primary)",
+                }}
+              >
+                Update
+              </button>
+            )}
             <button
               className="cancel-button"
               onClick={() => {
