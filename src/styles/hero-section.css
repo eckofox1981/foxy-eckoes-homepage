@@ -13,6 +13,10 @@
   padding-top: 1px;
   padding-bottom: 1px;
 }
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
 
 .text-content {
   display: flex;
