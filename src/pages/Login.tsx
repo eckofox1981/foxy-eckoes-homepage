@@ -122,7 +122,9 @@ export function LoginPage() {
               id="usernameRegister"
               type="text"
               placeholder="username"
-              onChange={() => setUsernameRegister(event?.target?.value || "")}
+              onChange={(event) =>
+                setUsernameRegister(event.target?.value || "")
+              }
             />
           </div>
           <div className="form-field">
