@@ -20,8 +20,6 @@ export function Header() {
   };
 
   const loginButton = () => {
-    console.log(loginBtn.text);
-
     return (
       <Link to={loginBtn.link}>
         <button className="menu-button">{loginBtn.text}</button>

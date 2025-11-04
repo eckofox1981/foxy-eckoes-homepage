@@ -3,8 +3,18 @@ import type { Booking } from "../models/Booking";
 import "../styles/buttons.css";
 import "../styles/user-bookings.css";
 import { convertDate } from "../utility/DateUtility";
+import { cancelBooking } from "../api/BookingRequests";
+import { useToastStore } from "../store/ToastStore";
 
-export function UserBookings({ bookings }: { bookings: Booking[] }) {
+export function UserBookings({
+  bookings,
+  reloadUser,
+}: {
+  bookings: Booking[];
+  reloadUser: () => void;
+}) {
+  const showToast = useToastStore((store) => store.showToast);
+
   const status = (status: string) => {
     let statusColor: string = "grey";
     if (status === "CONFIRMED") statusColor = "green";
@@ -12,6 +22,17 @@ export function UserBookings({ bookings }: { bookings: Booking[] }) {
     if (status === "PENDING") statusColor = "var(--special-color)";
 
     return <p style={{ color: statusColor }}>{status.toUpperCase()}</p>;
+  };
+
+  const handleCancel = async (bookingID: string) => {
+    if (!confirm("Are you sure you want to cancel this booking?")) return;
+    try {
+      const message: string = await cancelBooking(bookingID);
+      showToast("Booking cancelled 😢", message, "var(--special-color");
+      reloadUser();
+    } catch (error: any) {
+      showToast("Error while cancelling booking:", error.message, "red");
+    }
   };
 
   return bookings === undefined || bookings.length === 0 ? (
@@ -40,7 +61,14 @@ export function UserBookings({ bookings }: { bookings: Booking[] }) {
               {status(b.status)}
             </div>
             <button className="update-button">Update</button>
-            <button className="cancel-button">Cancel</button>
+            <button
+              className="cancel-button"
+              onClick={() => {
+                handleCancel(b.bookingId);
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </li>
       ))}

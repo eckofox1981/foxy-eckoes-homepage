@@ -1,7 +1,6 @@
 import { getToken } from "../localstorage/Token";
 import { Booking } from "../models/Booking";
-import { convertDate } from "../utility/DateUtility";
-import { BOOK_EVENT_URL } from "./API_URLS";
+import { BOOK_EVENT_URL, CANCEL_EVENT_URL } from "./API_URLS";
 
 export async function bookEvent(eventID: string, nbOfTickets: number) {
   try {
@@ -32,6 +31,26 @@ export async function bookEvent(eventID: string, nbOfTickets: number) {
     );
 
     return booking;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function cancelBooking(bookingID: string) {
+  try {
+    const response = await fetch(`${CANCEL_EVENT_URL}?bookingID=${bookingID}`, {
+      method: "PUT",
+      headers: {
+        Authorization: getToken(),
+      },
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    return await response.text();
   } catch (error: any) {
     throw new Error(error.message);
   }

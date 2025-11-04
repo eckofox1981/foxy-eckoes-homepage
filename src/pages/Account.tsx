@@ -17,24 +17,24 @@ export function AccountPage() {
   const showToast = useToastStore((store) => store.showToast);
   const navigate = useNavigate();
 
+  const fetchUser = async () => {
+    const token: string | undefined = getToken();
+    if (token === undefined) {
+      setLoginBtnToLogin();
+      showToast(
+        "Not Logged In",
+        "You cannot access your account page unless you login.",
+        "var(--special-color)"
+      );
+      navigate("/login");
+
+      return;
+    }
+    const fetched: User = await getUser(token);
+    setUser(fetched);
+  };
+
   useEffect(() => {
-    const fetchUser = async () => {
-      const token: string | undefined = getToken();
-      if (token === undefined) {
-        setLoginBtnToLogin();
-        showToast(
-          "Not Logged In",
-          "You cannot access your account page unless you login.",
-          "var(--special-color)"
-        );
-        navigate("/login");
-
-        return;
-      }
-      const fetched: User = await getUser(token);
-      setUser(fetched);
-    };
-
     fetchUser();
   }, []);
 
@@ -93,7 +93,7 @@ export function AccountPage() {
             </div>
           </section>
           <section className="user-bookings">
-            <UserBookings bookings={user.bookings} />
+            <UserBookings bookings={user.bookings} reloadUser={fetchUser} />
           </section>
           {user.role === "admin" && <AdminControls />}
         </>
