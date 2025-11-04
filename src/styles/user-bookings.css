@@ -1,0 +1,63 @@
+.booking-item {
+  list-style: none;
+  border: 2px solid var(--text-color);
+  border-radius: 1rem;
+  margin: 1rem 0;
+  width: 99%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+.booking-item > i {
+  font-size: 12px;
+}
+
+.booking-item h3 {
+  text-decoration: underline;
+  margin: 0;
+}
+
+.booking-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0;
+}
+
+.booking-date-location {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking-date-location > p {
+  margin: 0;
+}
+
+.booking-tickets > p {
+  margin: 0 auto;
+  text-align: center;
+  font-weight: 600;
+}
+
+.booking-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.booking-detail > p {
+  margin: 0;
+}
+
+.update-button {
+  margin-left: auto;
+  margin-right: 0.25rem;
+}
+
+.cancel-button {
+  margin-right: 0;
+}

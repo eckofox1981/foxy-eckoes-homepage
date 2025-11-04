@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "../api/UserRequests";
 import { getToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
+import { UserBookings } from "../components/UserBookings";
 
 export function AccountPage() {
   /*   const user = new User(
@@ -73,7 +74,7 @@ export function AccountPage() {
             <button className="menu-button">Edit</button>
           </section>
           <section className="user-bookings">
-            //TODO: implement bookings
+            <UserBookings bookings={user.bookings} />
           </section>
         </>
       )}
