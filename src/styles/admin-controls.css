@@ -1,0 +1,56 @@
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 780px;
+  background-color: var(--special-color);
+  border-radius: 1rem;
+  padding: 1rem;
+  max-width: 780px;
+}
+
+.admin-section > h2 {
+  margin: 0;
+}
+
+.admin-section > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-section button {
+  max-width: 8rem;
+}
+
+.cancel-event {
+  display: flex;
+  flex-direction: column;
+}
+
+.cancel-event > input {
+  background-color: var(--text-color);
+  color: var(--background-primary);
+  align-self: center;
+  width: 100%;
+}
+
+.cancel-event > button {
+  max-width: 100%;
+}
+
+@media only screen and (max-width: 780px) {
+  .admin-section > div {
+    flex-direction: column;
+  }
+
+  .admin-section button {
+    width: 15rem;
+    max-width: 100%;
+    align-self: center;
+  }
+}

@@ -7,6 +7,7 @@ import { getUser } from "../api/UserRequests";
 import { getToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
 import { UserBookings } from "../components/UserBookings";
+import { AdminControls } from "../components/AdminControls";
 
 export function AccountPage() {
   /*   const user = new User(
@@ -76,6 +77,7 @@ export function AccountPage() {
           <section className="user-bookings">
             <UserBookings bookings={user.bookings} />
           </section>
+          {user.role === "admin" && <AdminControls />}
         </>
       )}
     </main>
