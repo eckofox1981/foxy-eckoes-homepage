@@ -55,16 +55,25 @@
   display: none;
 }
 
-.message {
-  font-size: 1.5rem;
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem;
+  max-width: 780px;
 }
 
-.error {
-  color: red;
+.tag {
+  border: 1px solid var(--text-color);
+  border-radius: 0.5rem;
+  padding: 3px;
+  font-style: italic;
+  height: 1.5rem;
+  background-color: var(--button-std);
 }
 
-.success {
-  color: green;
+.tag > p {
+  margin: 0;
 }
 
 @media only screen and (min-width: 780px) {

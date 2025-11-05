@@ -11,6 +11,7 @@ import { convertDate } from "../utility/DateUtility";
 import type { Booking } from "../models/Booking";
 import { bookEvent } from "../api/BookingRequests";
 import { useToastStore } from "../store/ToastStore";
+import { Tag } from "../components/Tag";
 
 export function EventPage() {
   const eventId: string | undefined = useParams().id;
@@ -25,9 +26,6 @@ export function EventPage() {
   useEffect(() => {
     fetchEvent().then(setEvent);
   }, []);
-
-  const [msgStatus, setMsgStatus] = useState<string>("hidden");
-  const [message, setMessage] = useState<string>("");
 
   const handleBooking = async () => {
     let message: string;
@@ -93,8 +91,11 @@ export function EventPage() {
               Book {event.performer}
             </button>
           </section>
-          <section className={classNames("message", msgStatus)}>
-            {message}
+          <section className="tag-list">
+            {event.tags.length > 0 &&
+              event.tags.map((t) => {
+                return <Tag tag={"#" + t} />;
+              })}
           </section>
         </>
       )}
