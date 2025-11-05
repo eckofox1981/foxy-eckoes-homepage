@@ -4,7 +4,7 @@ import foxyEckoesLogo from "../assets/logos/F-E-logo-title.png";
 import { useState } from "react";
 import { User } from "../models/User";
 import classNames from "classnames";
-import { getUser, login, registerUser } from "../api/UserRequests";
+import { login, registerUser } from "../api/UserRequests";
 import { setToken } from "../localstorage/Token";
 import { useNavigate } from "react-router-dom";
 import { useLoginBtnStore } from "../store/LoginBtnStore";
