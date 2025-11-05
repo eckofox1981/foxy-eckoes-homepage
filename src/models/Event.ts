@@ -56,3 +56,15 @@ export class EventFilterDTO {
     this.tags = tags;
   }
 }
+
+export class ControlReport {
+  title: string;
+  eventsUpdated: string[];
+  text: string;
+
+  constructor(title: string, eventsUpdated: string[], text: string) {
+    this.title = title;
+    this.eventsUpdated = eventsUpdated;
+    this.text = text;
+  }
+}

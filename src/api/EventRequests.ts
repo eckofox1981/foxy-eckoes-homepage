@@ -1,5 +1,7 @@
-import { Event, EventFilterDTO } from "../models/Event";
+import { getToken } from "../localstorage/Token";
+import { ControlReport, Event, EventFilterDTO } from "../models/Event";
 import {
+  CONTROL_ALL_EVENT_SEAT_AVAILIBILITY_URL_ADMIN,
   FILTER_EVENT_URL,
   GET_ALL_EVENT_URL,
   GET_EVENT_BY_ID_URL,
@@ -107,6 +109,31 @@ export async function filterEvent(filterDTO: EventFilterDTO) {
     );
 
     return events;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function seatAvailibilityControl() {
+  try {
+    const response = await fetch(
+      CONTROL_ALL_EVENT_SEAT_AVAILIBILITY_URL_ADMIN,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const report = await response.json();
+
+    return new ControlReport(report.title, report.eventsUpdated, report.text);
   } catch (error: any) {
     throw new Error(error.message);
   }
