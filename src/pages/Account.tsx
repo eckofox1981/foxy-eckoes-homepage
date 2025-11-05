@@ -30,8 +30,18 @@ export function AccountPage() {
 
       return;
     }
-    const fetched: User = await getUser(token);
-    setUser(fetched);
+    try {
+      const fetched: User = await getUser(token);
+      setUser(fetched);
+    } catch (error) {
+      showToast(
+        "Session expired:",
+        "You might need to login again." + error.message,
+        "var(--background-primary)"
+      );
+      setLoginBtnToLogin();
+      navigate("/login");
+    }
   };
 
   useEffect(() => {
