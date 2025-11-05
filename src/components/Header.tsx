@@ -55,8 +55,8 @@ export function Header() {
         <li>{loginButton()}</li>
 
         <li>
-          <Link to={"/"}>
-            <button className="menu-button">Event</button>
+          <Link to={"/events"}>
+            <button className="menu-button">Events</button>
           </Link>
         </li>
         <li>
