@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "../styles/buttons.css";
 import "../styles/event-page.css";
 import { useParams } from "react-router-dom";
-import { getEventById } from "../api/GetEvent";
+import { getEventById } from "../api/EventRequests";
 import { Bars } from "react-loader-spinner";
 import { Toast } from "../components/modals/Toast";
 import { convertDate } from "../utility/DateUtility";

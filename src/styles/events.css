@@ -1,0 +1,27 @@
+h2 {
+  text-align: center;
+  padding: 1rem 1rem 0 1rem;
+}
+
+.events-filter-section {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.events-filter-section > button {
+  margin: 1rem 0;
+}
+
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 0.25rem;
+}
+
+.filter-form label input {
+  margin: 1rem;
+}

@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/Login";
 import { EventPage } from "./pages/Event";
 import { AccountPage } from "./pages/Account";
 import { Toast } from "./components/modals/Toast";
+import { EventsPage } from "./pages/Events";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/event/:id" element={<EventPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/events" element={<EventsPage />} />
         </Routes>
         <Footer />
         <Toast />

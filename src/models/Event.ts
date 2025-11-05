@@ -34,3 +34,25 @@ export class Event {
     this.numberOfBookings = numberOfBookings;
   }
 }
+
+export class EventFilterDTO {
+  fromDate: Date;
+  toDate: Date;
+  performer: string;
+  location: string;
+  tags: string[];
+
+  constructor(
+    fromDate: Date,
+    toDate: Date,
+    performer: string,
+    location: string,
+    tags: string[]
+  ) {
+    this.fromDate = fromDate;
+    this.toDate = toDate;
+    this.performer = performer;
+    this.location = location;
+    this.tags = tags;
+  }
+}
