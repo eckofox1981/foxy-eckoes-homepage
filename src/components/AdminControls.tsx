@@ -5,9 +5,9 @@ import { SeatAvailibityControl } from "./modals/SeatAvailibilityControl";
 import { EventEditor } from "./modals/EventEditor";
 import { AdminEventCard } from "./AdminEventCard";
 import { EventUpdateSelector } from "./modals/EventSelector";
+import type { Event } from "../models/Event";
 export function AdminControls() {
-  const [eventId, setEventID] = useState<string>("");
-  const [bookingId, setBookingId] = useState<string>("");
+  const [eventToUpdate, setEventToUpdate] = useState<Event | null>(null);
   const [showSeatControl, setShowSeatControl] = useState<string>("hidden");
   const [showEventEditor, setShowEventEditor] = useState<string>("hidden");
   const [showEventUpdate, setShowEventUpdate] = useState<string>("hidden");
@@ -36,16 +36,8 @@ export function AdminControls() {
     }
   };
 
-  const handleCancelEvent = () => {
-    console.log("cancel event: " + eventId);
-  };
-
   const handleSeeBookings = () => {
     console.log("see bookings");
-  };
-
-  const handleDeleteBooking = () => {
-    console.log("delete booking: " + bookingId);
   };
 
   return (
@@ -60,24 +52,9 @@ export function AdminControls() {
           <button className="update-button" onClick={handleUpdate}>
             Update Event
           </button>
-          <br />
           <button className="update-button" onClick={handleAvailibilityControl}>
             Seat Availibity control
           </button>
-          <div className="cancel-event">
-            <input
-              id="eventIdInput"
-              type="text"
-              value={eventId}
-              onChange={(e) => {
-                setEventID(e.target?.value);
-              }}
-              placeholder="Event ID to be cancelled"
-            />
-            <button className="cancel-button" onClick={handleCancelEvent}>
-              Cancel Event
-            </button>
-          </div>
         </div>
         <h3>Booking management</h3>
         <div>
@@ -87,7 +64,11 @@ export function AdminControls() {
           <br />
         </div>
       </section>
-      <EventEditor event={null} show={showEventEditor} close={handleCreate} />
+      <EventEditor
+        event={eventToUpdate}
+        show={showEventEditor}
+        close={handleCreate}
+      />
       <EventUpdateSelector show={showEventUpdate} close={handleUpdate} />
       <SeatAvailibityControl
         show={showSeatControl}

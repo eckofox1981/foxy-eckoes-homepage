@@ -39,7 +39,7 @@ export function AdminEventCard({
 
   return (
     <article className="admin-event-card">
-      <div className="details">
+      <div className="admin-event-card-details">
         <b>{event.performer}</b>
         <i>{event.location}</i>
         <p>{eventDate}</p>

@@ -1,7 +1,6 @@
 .admin-event-card {
   display: flex;
   width: 98%;
-  max-width: 780px;
   align-items: center;
   margin-bottom: auto auto 0.5rem auto;
   border: 1px solid var(--text-color);
@@ -13,28 +12,27 @@
   width: 6rem;
   padding: 0;
   margin: 0;
-  background-color: purple;
 }
 
-.details {
+.admin-event-card-details {
   margin: -1px 2px -1px -1px;
   display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  width: 95%;
   background-color: var(--background-primary);
   border-radius: 1rem;
   border: 1px solid var(--text-color);
   text-align: center;
 }
 
-.details > b {
+.admin-event-card-details > b {
   width: 35%;
 }
-
-.details > i {
+.admin-event-card-details > i {
   width: 40%;
 }
 
-.details > p {
+.admin-event-card-details > p {
   width: 25%;
 }
