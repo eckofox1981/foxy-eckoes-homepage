@@ -2,6 +2,8 @@ import type { Event } from "../models/Event";
 import { convertDate } from "../utility/DateUtility";
 import "../styles/admin-event-card.css";
 import "../styles/buttons.css";
+import { deleteEvent } from "../api/EventRequests";
+import { useToastStore } from "../store/ToastStore";
 
 export function AdminEventCard({
   event,
@@ -10,6 +12,7 @@ export function AdminEventCard({
   event: Event;
   refreshEventList: () => void;
 }) {
+  const showToast = useToastStore((store) => store.showToast);
   const eventDate: string = event ? convertDate(event?.date) : "";
 
   const handleUpdate = async () => {
@@ -24,7 +27,14 @@ export function AdminEventCard({
     ) {
       return;
     }
-    console.log("handleDelete");
+
+    try {
+      const response: string = await deleteEvent(event.eventId);
+      refreshEventList();
+      showToast("Event deleted", response, "green");
+    } catch (error: any) {
+      showToast("Error deleting event:", error.message, "red");
+    }
   };
 
   return (

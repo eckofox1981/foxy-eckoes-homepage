@@ -1,3 +1,4 @@
+import { AdminEventCard } from "../components/AdminEventCard";
 import { getToken } from "../localstorage/Token";
 import {
   ControlReport,
@@ -8,6 +9,7 @@ import {
 import {
   CONTROL_ALL_EVENT_SEAT_AVAILIBILITY_URL_ADMIN,
   CREATE_EVENT_URL_ADMIN,
+  DELETE_EVENT_URL_ADMIN,
   FILTER_EVENT_URL,
   GET_ALL_EVENT_URL,
   GET_EVENT_BY_ID_URL,
@@ -165,6 +167,27 @@ export async function createEvent(newEvent: NewEvent) {
     console.log("createEvent:" + json.eventId);
 
     return json.eventId;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function deleteEvent(eventID: string) {
+  try {
+    const response = await fetch(
+      `${DELETE_EVENT_URL_ADMIN}?eventID=${eventID}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: getToken() },
+      }
+    );
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    return await response.text();
   } catch (error: any) {
     throw new Error(error.message);
   }

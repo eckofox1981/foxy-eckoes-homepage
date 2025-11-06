@@ -26,10 +26,10 @@ export function EventUpdateSelector({
   };
 
   useEffect(() => {
-    setDisplay(show);
     if (show !== "hidden") {
       fetchEvents();
     }
+    setDisplay(show);
   }, [show]);
 
   const handleCancel = () => {
@@ -37,7 +37,7 @@ export function EventUpdateSelector({
   };
 
   return (
-    <section className={classNames("modal", { display })}>
+    <section className={classNames("modal", display)}>
       <h2 style={{ margin: "0.25rem" }}>Select event to update or delete</h2>
       <div className="scrollable">
         {!events || events.length === 0 ? (

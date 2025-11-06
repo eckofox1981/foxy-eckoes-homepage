@@ -10,6 +10,7 @@ export function AdminControls() {
   const [bookingId, setBookingId] = useState<string>("");
   const [showSeatControl, setShowSeatControl] = useState<string>("hidden");
   const [showEventEditor, setShowEventEditor] = useState<string>("hidden");
+  const [showEventUpdate, setShowEventUpdate] = useState<string>("hidden");
 
   const handleCreate = () => {
     if (showEventEditor === "hidden") {
@@ -20,7 +21,11 @@ export function AdminControls() {
   };
 
   const handleUpdate = () => {
-    console.log("update event");
+    if (showEventUpdate === "hidden") {
+      setShowEventUpdate("");
+    } else {
+      setShowEventUpdate("hidden");
+    }
   };
 
   const handleAvailibilityControl = () => {
@@ -96,7 +101,7 @@ export function AdminControls() {
         </div>
       </section>
       <EventEditor event={null} show={showEventEditor} close={handleCreate} />
-      <EventUpdateSelector show="" close={handleUpdate} />
+      <EventUpdateSelector show={showEventUpdate} close={handleUpdate} />
       <SeatAvailibityControl
         show={showSeatControl}
         close={handleAvailibilityControl}

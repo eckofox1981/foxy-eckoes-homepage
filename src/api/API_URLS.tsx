@@ -5,6 +5,8 @@ export const GET_EVENT_BY_ID_URL: string =
 
 export const CREATE_EVENT_URL_ADMIN = "http://localhost:8080/event/create";
 
+export const DELETE_EVENT_URL_ADMIN = "http://localhost:8080/event/cancel";
+
 export const FILTER_EVENT_URL = "http://localhost:8080/event/filter";
 
 export const UPDATE_EVENT_URL_ADMIN = "http://localhost:8080/event/update";
