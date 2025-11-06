@@ -3,6 +3,8 @@ import "../styles/buttons.css";
 import "../styles/admin-controls.css";
 import { SeatAvailibityControl } from "./modals/SeatAvailibilityControl";
 import { EventEditor } from "./modals/EventEditor";
+import { AdminEventCard } from "./AdminEventCard";
+import { EventUpdateSelector } from "./modals/EventSelector";
 export function AdminControls() {
   const [eventId, setEventID] = useState<string>("");
   const [bookingId, setBookingId] = useState<string>("");
@@ -94,6 +96,7 @@ export function AdminControls() {
         </div>
       </section>
       <EventEditor event={null} show={showEventEditor} close={handleCreate} />
+      <EventUpdateSelector show="" close={handleUpdate} />
       <SeatAvailibityControl
         show={showSeatControl}
         close={handleAvailibilityControl}

@@ -60,6 +60,7 @@ button:hover {
   padding: 0.25rem;
   border-radius: 0.5rem;
   height: fit-content;
+  height: 3rem;
 }
 
 .cancel-button {
@@ -70,6 +71,7 @@ button:hover {
   padding: 0.25rem;
   border-radius: 0.5rem;
   height: fit-content;
+  height: 3rem;
 }
 
 .cancel-button:hover {
