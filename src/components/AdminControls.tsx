@@ -94,7 +94,10 @@ export function AdminControls() {
         </div>
       </section>
       <EventEditor event={null} show={showEventEditor} close={handleCreate} />
-      <SeatAvailibityControl show={showSeatControl} />
+      <SeatAvailibityControl
+        show={showSeatControl}
+        close={handleAvailibilityControl}
+      />
     </>
   );
 }

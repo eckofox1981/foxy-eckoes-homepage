@@ -5,7 +5,13 @@ import { ControlReport } from "../../models/Event";
 import { useToastStore } from "../../store/ToastStore";
 import { seatAvailibilityControl } from "../../api/EventRequests";
 
-export function SeatAvailibityControl({ show }: { show: string }) {
+export function SeatAvailibityControl({
+  show,
+  close,
+}: {
+  show: string;
+  close: () => void;
+}) {
   const [display, setDisplay] = useState<string>("hidden");
   const [report, setReport] = useState<ControlReport | null>(null);
   const showToast = useToastStore((store) => store.showToast);
@@ -14,7 +20,7 @@ export function SeatAvailibityControl({ show }: { show: string }) {
   }, [show]);
 
   const handleCancel = () => {
-    setDisplay("hidden");
+    close();
     setReport(null);
   };
 
