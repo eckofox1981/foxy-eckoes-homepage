@@ -85,19 +85,6 @@ export function AdminControls() {
             See all bookings
           </button>
           <br />
-          <div className="cancel-event">
-            <input
-              type="text"
-              value={bookingId}
-              onChange={(e) => {
-                setBookingId(e.target?.value);
-              }}
-              placeholder="Booking ID to be deleted"
-            />
-            <button className="cancel-button" onClick={handleDeleteBooking}>
-              Delete Booking
-            </button>
-          </div>
         </div>
       </section>
       <EventEditor event={null} show={showEventEditor} close={handleCreate} />

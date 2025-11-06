@@ -29,22 +29,6 @@
   line-height: 1.25rem;
 }
 
-.cancel-event {
-  display: flex;
-  flex-direction: column;
-}
-
-.cancel-event > input {
-  background-color: var(--text-color);
-  color: var(--background-primary);
-  align-self: center;
-  width: 100%;
-}
-
-.cancel-event > button {
-  max-width: 100%;
-}
-
 @media only screen and (max-width: 780px) {
   .admin-section > div {
     flex-direction: column;
