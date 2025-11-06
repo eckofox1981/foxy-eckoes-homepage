@@ -24,7 +24,9 @@
 }
 
 .admin-section button {
-  max-width: 8rem;
+  min-height: fit-content;
+  padding: 2px;
+  line-height: 1.25rem;
 }
 
 .cancel-event {

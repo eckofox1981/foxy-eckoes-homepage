@@ -61,6 +61,8 @@ button:hover {
   border-radius: 0.5rem;
   height: fit-content;
   height: 3rem;
+  max-height: fit-content;
+  max-width: 10rem;
 }
 
 .cancel-button {
