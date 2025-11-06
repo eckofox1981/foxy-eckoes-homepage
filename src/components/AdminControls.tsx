@@ -2,13 +2,19 @@ import { useState } from "react";
 import "../styles/buttons.css";
 import "../styles/admin-controls.css";
 import { SeatAvailibityControl } from "./modals/SeatAvailibilityControl";
+import { EventEditor } from "./modals/EventEditor";
 export function AdminControls() {
   const [eventId, setEventID] = useState<string>("");
   const [bookingId, setBookingId] = useState<string>("");
   const [showSeatControl, setShowSeatControl] = useState<string>("hidden");
+  const [showEventEditor, setShowEventEditor] = useState<string>("hidden");
 
   const handleCreate = () => {
-    console.log("create event");
+    if (showEventEditor === "hidden") {
+      setShowEventEditor("");
+    } else {
+      setShowEventEditor("hidden");
+    }
   };
 
   const handleUpdate = () => {
@@ -87,6 +93,7 @@ export function AdminControls() {
           </div>
         </div>
       </section>
+      <EventEditor event={null} show={showEventEditor} close={handleCreate} />
       <SeatAvailibityControl show={showSeatControl} />
     </>
   );
