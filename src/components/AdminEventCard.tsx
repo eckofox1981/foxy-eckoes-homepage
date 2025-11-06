@@ -4,19 +4,25 @@ import "../styles/admin-event-card.css";
 import "../styles/buttons.css";
 import { deleteEvent } from "../api/EventRequests";
 import { useToastStore } from "../store/ToastStore";
+import { useEventUpdateStore } from "../store/EventUpdateStore";
 
 export function AdminEventCard({
   event,
   refreshEventList,
+  showEventEditor,
 }: {
   event: Event;
   refreshEventList: () => void;
+  showEventEditor: () => void;
 }) {
   const showToast = useToastStore((store) => store.showToast);
   const eventDate: string = event ? convertDate(event?.date) : "";
+  const setEventUpdate = useEventUpdateStore((store) => store.setEventUpdate);
 
-  const handleUpdate = async () => {
-    console.log("handleUpdate");
+  const handleUpdate = () => {
+    console.log(JSON.stringify(event));
+    setEventUpdate(event);
+    showEventEditor();
   };
 
   const handleDelete = async () => {

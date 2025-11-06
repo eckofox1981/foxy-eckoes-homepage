@@ -8,9 +8,11 @@ import { AdminEventCard } from "../AdminEventCard";
 export function EventUpdateSelector({
   show,
   close,
+  showEventEditor,
 }: {
   show: string;
   close: () => void;
+  showEventEditor: () => void;
 }) {
   const [events, setEvents] = useState<Event[] | null>([]);
   const [display, setDisplay] = useState<string>("hidden");
@@ -48,6 +50,7 @@ export function EventUpdateSelector({
               key={index}
               event={e}
               refreshEventList={fetchEvents}
+              showEventEditor={showEventEditor}
             />
           ))
         )}

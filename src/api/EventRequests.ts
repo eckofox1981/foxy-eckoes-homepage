@@ -13,6 +13,8 @@ import {
   FILTER_EVENT_URL,
   GET_ALL_EVENT_URL,
   GET_EVENT_BY_ID_URL,
+  UPDATE_BOOKING_URL,
+  UPDATE_EVENT_URL_ADMIN,
 } from "./API_URLS";
 
 export async function getAllEvents() {
@@ -188,6 +190,30 @@ export async function deleteEvent(eventID: string) {
     }
 
     return await response.text();
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function updateEvent(event: Event) {
+  try {
+    const response = await fetch(UPDATE_EVENT_URL_ADMIN, {
+      method: "PUT",
+      headers: {
+        Authorization: getToken(),
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(event),
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const json = await response.json();
+
+    return json.eventId;
   } catch (error: any) {
     throw new Error(error.message);
   }

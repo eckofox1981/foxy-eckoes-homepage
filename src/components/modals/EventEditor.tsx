@@ -4,20 +4,18 @@ import classNames from "classnames";
 import { Event, NewEvent } from "../../models/Event";
 import "../../styles/event-editor.css";
 import { useToastStore } from "../../store/ToastStore";
-import { createEvent } from "../../api/EventRequests";
+import { createEvent, updateEvent } from "../../api/EventRequests";
 import { useNavigate } from "react-router-dom";
+import { useEventUpdateStore } from "../../store/EventUpdateStore";
 
 export function EventEditor({
-  event,
   show,
   close,
 }: {
-  event: Event | null;
   show: string;
   close: () => void;
 }) {
   const [display, setDisplay] = useState<string>("hidden");
-  const [newEvent, setEvent] = useState<Event | null>(null);
   const [isNew, setIsNew] = useState<boolean>(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [performer, setPerformer] = useState<string | undefined>("");
@@ -28,24 +26,40 @@ export function EventEditor({
   const [numberOfSeats, setNbOSeats] = useState<number | undefined>(0);
   const showToast = useToastStore((store) => store.showToast);
   const navigate = useNavigate();
+  const event = useEventUpdateStore((store) => store.eventUpdate);
+  const setEvent = useEventUpdateStore((store) => store.setEventUpdate);
+  const removeEvent = useEventUpdateStore((store) => store.removeEventUpdate);
 
   useEffect(() => {
+    console.log("Effect triggered - event:", event);
+
     if (event === null) {
+      // New event - reset to defaults
       setIsNew(true);
+      setDate(new Date());
+      setPerformer("");
+      setDescription("");
+      setLocation("");
+      setPictureUrl("");
+      setTags([]);
+      setNbOSeats(0);
     } else {
-      setEvent(event);
-      setDate(newEvent?.date);
-      setPerformer(newEvent?.performer);
-      setDescription(newEvent?.description);
-      setLocation(newEvent?.location);
-      setPictureUrl(newEvent?.pictureUrl);
-      setTags(newEvent?.tags);
-      setNbOSeats(newEvent?.numberOfSeats);
+      setIsNew(false);
+      const eventDate = new Date(event.date);
+      setDate(eventDate);
+      setPerformer(event.performer);
+      setDescription(event.description);
+      setLocation(event.location);
+      setPictureUrl(event.pictureUrl || "");
+      setTags(event.tags || []);
+      setNbOSeats(event.numberOfSeats);
     }
+
     setDisplay(show);
-  }, [show]);
+  }, [show, event]);
 
   const handleCancel = () => {
+    removeEvent();
     close();
   };
 
@@ -87,13 +101,38 @@ export function EventEditor({
     }
   };
 
+  const handleUpdate = async () => {
+    const updatedEvent = new Event(
+      event.eventId,
+      date,
+      performer,
+      description,
+      location,
+      pictureUrl,
+      tags,
+      numberOfSeats,
+      event?.numberOfSeatsLeft,
+      event?.numberOfBookings
+    );
+
+    try {
+      const eventID = await updateEvent(updatedEvent);
+      showToast(
+        "Event updated",
+        "The event \n" + eventID + "\n has been updated.",
+        "green"
+      );
+      setDisplay("hidden");
+    } catch (error: any) {
+      showToast("Error updating event:", error.message, "red");
+    }
+  };
+
   return (
     <section className={classNames("modal", display)}>
       <i>
         Event ID#:{" "}
-        {newEvent?.eventId
-          ? newEvent.eventId
-          : "new event -> ID to be generated."}
+        {event?.eventId ? event.eventId : "new event -> ID to be generated."}
       </i>
       <form action="edit" className="edit-form">
         <div>
@@ -187,7 +226,9 @@ export function EventEditor({
             Create
           </button>
         ) : (
-          <button className="update-button">Update event</button>
+          <button className="update-button" onClick={handleUpdate}>
+            Update event
+          </button>
         )}
         <button className="cancel-button" onClick={handleCancel}>
           Cancel

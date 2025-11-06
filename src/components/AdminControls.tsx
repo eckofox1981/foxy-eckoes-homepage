@@ -3,20 +3,23 @@ import "../styles/buttons.css";
 import "../styles/admin-controls.css";
 import { SeatAvailibityControl } from "./modals/SeatAvailibilityControl";
 import { EventEditor } from "./modals/EventEditor";
-import { AdminEventCard } from "./AdminEventCard";
 import { EventUpdateSelector } from "./modals/EventSelector";
-import type { Event } from "../models/Event";
+import { useEventUpdateStore } from "../store/EventUpdateStore";
 export function AdminControls() {
-  const [eventToUpdate, setEventToUpdate] = useState<Event | null>(null);
   const [showSeatControl, setShowSeatControl] = useState<string>("hidden");
   const [showEventEditor, setShowEventEditor] = useState<string>("hidden");
   const [showEventUpdate, setShowEventUpdate] = useState<string>("hidden");
+
+  const removeEventUpdate = useEventUpdateStore(
+    (store) => store.removeEventUpdate
+  );
 
   const handleCreate = () => {
     if (showEventEditor === "hidden") {
       setShowEventEditor("");
     } else {
       setShowEventEditor("hidden");
+      removeEventUpdate();
     }
   };
 
@@ -64,16 +67,17 @@ export function AdminControls() {
           <br />
         </div>
       </section>
-      <EventEditor
-        event={eventToUpdate}
-        show={showEventEditor}
-        close={handleCreate}
+      //Lesson today: modal at the bottom appears on top of the others
+      <EventUpdateSelector
+        show={showEventUpdate}
+        close={handleUpdate}
+        showEventEditor={handleCreate}
       />
-      <EventUpdateSelector show={showEventUpdate} close={handleUpdate} />
       <SeatAvailibityControl
         show={showSeatControl}
         close={handleAvailibilityControl}
       />
+      <EventEditor show={showEventEditor} close={handleCreate} />
     </>
   );
 }
