@@ -1,7 +1,13 @@
 import { getToken } from "../localstorage/Token";
-import { ControlReport, Event, EventFilterDTO } from "../models/Event";
+import {
+  ControlReport,
+  Event,
+  EventFilterDTO,
+  NewEvent,
+} from "../models/Event";
 import {
   CONTROL_ALL_EVENT_SEAT_AVAILIBILITY_URL_ADMIN,
+  CREATE_EVENT_URL_ADMIN,
   FILTER_EVENT_URL,
   GET_ALL_EVENT_URL,
   GET_EVENT_BY_ID_URL,
@@ -134,6 +140,31 @@ export async function seatAvailibilityControl() {
     const report = await response.json();
 
     return new ControlReport(report.title, report.eventsUpdated, report.text);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function createEvent(newEvent: NewEvent) {
+  try {
+    const response = await fetch(CREATE_EVENT_URL_ADMIN, {
+      method: "POST",
+      headers: {
+        Authorization: getToken(),
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(newEvent),
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const json = await response.json();
+    console.log("createEvent:" + json.eventId);
+
+    return json.eventId;
   } catch (error: any) {
     throw new Error(error.message);
   }

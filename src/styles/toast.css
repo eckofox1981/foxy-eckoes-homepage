@@ -1,5 +1,5 @@
 .toast {
-  position: absolute;
+  position: fixed;
   top: 20%;
   left: 25%;
   width: 50%;
@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 100;
 }
 
 .toast-title {
@@ -22,6 +23,7 @@
 
 .toast-text {
   font-size: 1.25rem;
+  white-space: pre-line;
 }
 
 .menu-button {

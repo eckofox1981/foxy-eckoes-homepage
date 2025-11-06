@@ -60,7 +60,7 @@ export class EventFilterDTO {
 export class NewEvent {
   date: Date;
   performer: string;
-  desciption: string;
+  description: string;
   location: string;
   pictureUrl: string;
   tags: string[];
@@ -69,7 +69,7 @@ export class NewEvent {
   constructor(
     date: Date,
     performer: string,
-    desciption: string,
+    description: string,
     location: string,
     pictureUrl: string,
     tags: string[],
@@ -77,7 +77,7 @@ export class NewEvent {
   ) {
     this.date = date;
     this.performer = performer;
-    this.desciption = desciption;
+    this.description = description;
     this.location = location;
     this.pictureUrl = pictureUrl;
     this.tags = tags;
