@@ -57,6 +57,34 @@ export class EventFilterDTO {
   }
 }
 
+export class NewEvent {
+  date: Date;
+  performer: string;
+  desciption: string;
+  location: string;
+  pictureUrl: string;
+  tags: string[];
+  numberOfSeats: number;
+
+  constructor(
+    date: Date,
+    performer: string,
+    desciption: string,
+    location: string,
+    pictureUrl: string,
+    tags: string[],
+    numberOfSeats: number
+  ) {
+    this.date = date;
+    this.performer = performer;
+    this.desciption = desciption;
+    this.location = location;
+    this.pictureUrl = pictureUrl;
+    this.tags = tags;
+    this.numberOfSeats = numberOfSeats;
+  }
+}
+
 export class ControlReport {
   title: string;
   eventsUpdated: string[];
