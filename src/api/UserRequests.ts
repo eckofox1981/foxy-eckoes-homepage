@@ -1,6 +1,11 @@
-import { setToken } from "../localstorage/Token";
+import { getToken, setToken } from "../localstorage/Token";
 import { User } from "../models/User";
-import { GET_USER_INFO_URL, LOGIN_URL, REGISTER_USER_URL } from "./API_URLS";
+import {
+  GET_ALL_USERS_URL_ADMIN,
+  GET_USER_INFO_URL,
+  LOGIN_URL,
+  REGISTER_USER_URL,
+} from "./API_URLS";
 
 export async function login(username: string, password: string) {
   const userPassDTO: any = {
@@ -92,6 +97,28 @@ export async function registerUser(
     );
     setToken(jwtToken);
     return "Registration completed, you are being directed to your account page.";
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+//ADMIN
+
+export async function getAllUsers() {
+  try {
+    const response = await fetch(GET_ALL_USERS_URL_ADMIN, {
+      method: "GET",
+      headers: {
+        Authorization: getToken(),
+      },
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    return await response.json();
   } catch (error: any) {
     throw new Error(error.message);
   }

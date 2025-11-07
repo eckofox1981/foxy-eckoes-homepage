@@ -5,10 +5,12 @@ import { SeatAvailibityControl } from "./modals/SeatAvailibilityControl";
 import { EventEditor } from "./modals/EventEditor";
 import { EventUpdateSelector } from "./modals/EventSelector";
 import { useEventUpdateStore } from "../store/EventUpdateStore";
+import { UserSelector } from "./modals/UserSelector";
 export function AdminControls() {
   const [showSeatControl, setShowSeatControl] = useState<string>("hidden");
   const [showEventEditor, setShowEventEditor] = useState<string>("hidden");
   const [showEventUpdate, setShowEventUpdate] = useState<string>("hidden");
+  const [showUserSelector, setShowUserSelector] = useState<string>("hidden");
 
   const removeEventUpdate = useEventUpdateStore(
     (store) => store.removeEventUpdate
@@ -40,7 +42,11 @@ export function AdminControls() {
   };
 
   const handleSeeBookings = () => {
-    console.log("see bookings");
+    if (showUserSelector === "hidden") {
+      setShowUserSelector("");
+    } else {
+      setShowUserSelector("hidden");
+    }
   };
 
   return (
@@ -78,6 +84,7 @@ export function AdminControls() {
         close={handleAvailibilityControl}
       />
       <EventEditor show={showEventEditor} close={handleCreate} />
+      <UserSelector show={showUserSelector} close={handleSeeBookings} />
     </>
   );
 }
