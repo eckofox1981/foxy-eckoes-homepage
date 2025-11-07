@@ -3,6 +3,7 @@ import { Booking } from "../models/Booking";
 import {
   BOOK_EVENT_URL,
   CANCEL_BOOKING_URL,
+  GET_ALL_BOOKINGS_BY_USERID_URL_ADMIN,
   UPDATE_BOOKING_URL,
 } from "./API_URLS";
 
@@ -90,6 +91,42 @@ export async function updateBooking(bookingID: string, nbTickets: number) {
       updated.status,
       updated.dateCreated
     );
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+//AMIN
+export async function getBookingsByUserId(userId: string) {
+  try {
+    const response = await fetch(
+      `${GET_ALL_BOOKINGS_BY_USERID_URL_ADMIN}?userID=${userId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const json = await response.json();
+    const bookings: Booking[] = json.map((b) => {
+      return new Booking(
+        b.bookingId,
+        b.event,
+        b.username,
+        b.numberOfTickets,
+        b.status,
+        b.dateCreated
+      );
+    });
+
+    return bookings;
   } catch (error: any) {
     throw new Error(error.message);
   }

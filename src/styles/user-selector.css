@@ -19,3 +19,43 @@
 .user-item-username {
   font-weight: 800;
 }
+.user-booking-list {
+  position: fixed;
+  margin-top: 2rem;
+  left: 15%;
+  right: auto;
+  width: 70%;
+  background-color: var(--background-primary);
+  z-index: 50;
+  height: 40vh;
+  overflow-x: scroll;
+}
+
+.user-booking-item-for-admin {
+  border: 1px solid var(--text-color);
+  padding: 0;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.user-booking-item-for-admin > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-booking-event-info {
+  width: 50%;
+}
+
+.user-booking-event-info > h3 {
+  margin: 0;
+}
+
+.user-booking-event-info > p {
+  margin: 0;
+}
+
+.user-booking-booking-info {
+  width: 30%;
+}

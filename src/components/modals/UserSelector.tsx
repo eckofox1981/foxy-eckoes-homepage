@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../../api/UserRequests";
 import { useToastStore } from "../../store/ToastStore";
 import "../../styles/user-selector.css";
+import { AdminUserBooking } from "../AdminUserBooking";
 
 export function UserSelector({
   show,
@@ -76,16 +77,11 @@ export function UserSelector({
         <ul className="scrollable">
           {filteredUsers &&
             Object.entries(filteredUsers).map(([userId, username]) => (
-              <li
-                className="user-item"
+              <AdminUserBooking
                 key={userId}
-                onClick={() => {
-                  console.log(userId);
-                }}
-              >
-                <span className="user-item-username">{username}</span>
-                <span>{userId}</span>
-              </li>
+                userId={userId}
+                username={username}
+              />
             ))}
         </ul>
         <button className="menu-button" onClick={close}>
