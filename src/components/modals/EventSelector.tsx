@@ -4,6 +4,7 @@ import { Event } from "../../models/Event";
 import { getAllEvents } from "../../api/EventRequests";
 import { useToastStore } from "../../store/ToastStore";
 import { AdminEventCard } from "../AdminEventCard";
+import { useEventListUpdateStore } from "../../store/EventUpdateStore";
 
 export function EventUpdateSelector({
   show,
@@ -14,9 +15,12 @@ export function EventUpdateSelector({
   close: () => void;
   showEventEditor: () => void;
 }) {
-  const [events, setEvents] = useState<Event[] | null>([]);
   const [display, setDisplay] = useState<string>("hidden");
   const showToast = useToastStore((store) => store.showToast);
+  const events = useEventListUpdateStore((store) => store.eventListUpdate);
+  const setEvents = useEventListUpdateStore(
+    (store) => store.setEventListUpdate
+  );
 
   const fetchEvents = async () => {
     try {

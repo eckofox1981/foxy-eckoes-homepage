@@ -4,9 +4,16 @@ import classNames from "classnames";
 import { Event, NewEvent } from "../../models/Event";
 import "../../styles/event-editor.css";
 import { useToastStore } from "../../store/ToastStore";
-import { createEvent, updateEvent } from "../../api/EventRequests";
+import {
+  createEvent,
+  getAllEvents,
+  updateEvent,
+} from "../../api/EventRequests";
 import { useNavigate } from "react-router-dom";
-import { useEventUpdateStore } from "../../store/EventUpdateStore";
+import {
+  useEventListUpdateStore,
+  useEventUpdateStore,
+} from "../../store/EventUpdateStore";
 
 export function EventEditor({
   show,
@@ -29,6 +36,10 @@ export function EventEditor({
   const event = useEventUpdateStore((store) => store.eventUpdate);
   const setEvent = useEventUpdateStore((store) => store.setEventUpdate);
   const removeEvent = useEventUpdateStore((store) => store.removeEventUpdate);
+  const events = useEventListUpdateStore((store) => store.eventListUpdate);
+  const setEvents = useEventListUpdateStore(
+    (store) => store.setEventListUpdate
+  );
 
   useEffect(() => {
     console.log("Effect triggered - event:", event);
@@ -54,7 +65,6 @@ export function EventEditor({
       setTags(event.tags || []);
       setNbOSeats(event.numberOfSeats);
     }
-
     setDisplay(show);
   }, [show, event]);
 
@@ -122,6 +132,8 @@ export function EventEditor({
         "The event \n" + eventID + "\n has been updated.",
         "green"
       );
+      const newList: Event[] = await getAllEvents();
+      setEvents(newList);
       setDisplay("hidden");
     } catch (error: any) {
       showToast("Error updating event:", error.message, "red");

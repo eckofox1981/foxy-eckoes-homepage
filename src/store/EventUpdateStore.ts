@@ -14,3 +14,16 @@ const eventUpdateStore: StateCreator<EventUpdateStore> = (set) => ({
 });
 
 export const useEventUpdateStore = create(eventUpdateStore);
+
+interface EventListUpdateStore {
+  eventListUpdate: Event[] | null;
+  setEventListUpdate: (eventLIst: Event[] | null) => void;
+}
+
+const eventListUpdateStore: StateCreator<EventListUpdateStore> = (set) => ({
+  eventListUpdate: null,
+  setEventListUpdate: (eventList: Event[] | null) =>
+    set({ eventListUpdate: eventList }),
+});
+
+export const useEventListUpdateStore = create(eventListUpdateStore);

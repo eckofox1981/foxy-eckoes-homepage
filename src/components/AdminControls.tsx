@@ -62,12 +62,12 @@ export function AdminControls() {
         <h3>Booking management</h3>
         <div>
           <button className="update-button" onClick={handleSeeBookings}>
-            See all bookings
+            See bookings
           </button>
           <br />
         </div>
       </section>
-      //Lesson today: modal at the bottom appears on top of the others
+      {/*Lesson today: modal at the bottom appears on top of the others*/}
       <EventUpdateSelector
         show={showEventUpdate}
         close={handleUpdate}
