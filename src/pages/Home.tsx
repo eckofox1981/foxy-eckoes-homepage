@@ -22,7 +22,7 @@ export function Home() {
     };
 
     getEvents();
-  });
+  }, []);
 
   return (
     <main className="home-main">

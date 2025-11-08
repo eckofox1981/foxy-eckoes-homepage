@@ -44,9 +44,9 @@ export function EventPage() {
         booking.numberOfTickets +
         " tickets for " +
         booking.event.performer +
-        ".<br/> See you on the " +
+        ".\n See you on the " +
         convertDate(booking.event.date) +
-        "<br/> at " +
+        "\n at " +
         booking.event.location +
         "!";
       fetchEvent().then(setEvent);

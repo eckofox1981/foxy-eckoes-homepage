@@ -53,7 +53,6 @@ export function AdminUserBooking({
     console.log("delete ID: " + bookingID);
   };
 
-  //TODO add keys to booking item
   return (
     <li className="user-item" key={userId} onClick={show}>
       <span className="user-item-username">{username}</span>
