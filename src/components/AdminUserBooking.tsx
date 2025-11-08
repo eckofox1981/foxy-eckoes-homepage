@@ -53,6 +53,7 @@ export function AdminUserBooking({
     console.log("delete ID: " + bookingID);
   };
 
+  //TODO add keys to booking item
   return (
     <li className="user-item" key={userId} onClick={show}>
       <span className="user-item-username">{username}</span>
@@ -61,8 +62,8 @@ export function AdminUserBooking({
         {bookings.length === 0 ? (
           <i>No booking for this user.</i>
         ) : (
-          bookings.map((b) => (
-            <div className="user-booking-item-for-admin">
+          bookings.map((b, index) => (
+            <div key={index} className="user-booking-item-for-admin">
               <i>Booking ID: {b.bookingId}</i>
               <div>
                 <div className="user-booking-event-info">
