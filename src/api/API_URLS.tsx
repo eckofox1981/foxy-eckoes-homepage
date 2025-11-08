@@ -33,3 +33,6 @@ export const UPDATE_BOOKING_URL: string =
 
 export const GET_ALL_BOOKINGS_BY_USERID_URL_ADMIN =
   "http://localhost:8080/booking/get-bookings-by-userId";
+
+export const DELETE_BOOKING_BY_BOOKINGID_ADMIN =
+  "http://localhost:8080/booking/delete";

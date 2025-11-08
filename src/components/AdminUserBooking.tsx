@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { Booking } from "../models/Booking";
-import { getBookingsByUserId } from "../api/BookingRequests";
+import { deleteBookingById, getBookingsByUserId } from "../api/BookingRequests";
 import { useToastStore } from "../store/ToastStore";
 import { UserBookings } from "./UserBookings";
 import { convertDate } from "../utility/DateUtility";
@@ -49,8 +49,13 @@ export function AdminUserBooking({
     return <p style={{ color: statusColor }}>STATUS: {s}</p>;
   };
 
-  const handleDelete = (bookingID: string) => {
-    console.log("delete ID: " + bookingID);
+  const handleDelete = async (bookingID: string) => {
+    try {
+      const message = await deleteBookingById(bookingID);
+      showToast("Booking deleted.", message, "green");
+    } catch (error: any) {
+      showToast("Error while deleting booking", error.message, "red");
+    }
   };
 
   return (
