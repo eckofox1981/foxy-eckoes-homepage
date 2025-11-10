@@ -51,7 +51,12 @@ export function AdminUserBooking({
   const handleDelete = async (bookingID: string) => {
     try {
       const message = await deleteBookingById(bookingID);
-      showToast("Booking deleted.", message, "green");
+      showToast(
+        "Booking deleted.",
+        message +
+          "\nIf you deleted your own booking, you'll have to refresh your Account-page.",
+        "green"
+      );
     } catch (error: any) {
       showToast("Error while deleting booking", error.message, "red");
     }

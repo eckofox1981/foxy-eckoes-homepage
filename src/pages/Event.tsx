@@ -90,10 +90,13 @@ export function EventPage() {
             </button>
           </section>
           <section className="tag-list">
-            {event.tags.length > 0 &&
+            {event.tags !== null ? (
               event.tags.map((t) => {
                 return <Tag tag={"#" + t} />;
-              })}
+              })
+            ) : (
+              <p>No tags</p>
+            )}
           </section>
         </>
       )}
