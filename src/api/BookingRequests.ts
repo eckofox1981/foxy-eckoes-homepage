@@ -16,7 +16,6 @@ export async function bookEvent(eventID: string, nbOfTickets: number) {
         method: "POST",
         headers: {
           Authorization: getToken() ?? "",
-          "Content-type": "application/json",
         },
       }
     );

@@ -2,7 +2,7 @@ import { Event } from "../models/Event";
 import { useEffect, useState } from "react";
 import "../styles/buttons.css";
 import "../styles/event-page.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getEventById } from "../api/EventRequests";
 import { Bars } from "react-loader-spinner";
 import { convertDate } from "../utility/DateUtility";
@@ -10,11 +10,13 @@ import type { Booking } from "../models/Booking";
 import { bookEvent } from "../api/BookingRequests";
 import { useToastStore } from "../store/ToastStore";
 import { Tag } from "../components/Tag";
+import { getToken } from "../localstorage/Token";
 
 export function EventPage() {
   const eventId: string = useParams().id ?? "";
   const [event, setEvent] = useState<Event | null>(null);
   const showToast = useToastStore((store) => store.showToast);
+  const navigate = useNavigate();
 
   const fetchEvent = async () => {
     const response: Event = await getEventById(eventId);
@@ -26,15 +28,37 @@ export function EventPage() {
   }, []);
 
   const handleBooking = async () => {
+    if (!getToken()) {
+      showToast(
+        "Login",
+        "You need to login first.",
+        "var(--background-primary)"
+      );
+      navigate("/login");
+      return;
+    }
     let message: string;
+
     try {
       if (!event) return;
 
-      const ticketString = prompt("How many tickets do you want?", "1");
+      const ticketString = prompt("How many tickets do you want?", "0");
       const tickets: number = ticketString ? Number.parseInt(ticketString) : 0;
 
-      if (tickets < 1)
+      if (!tickets) {
+        return;
+      } else if (tickets < 1) {
         throw Error("You need to enter a valid number of tickets.");
+      }
+
+      if (!getToken()) {
+        showToast(
+          "Login",
+          "You need to login first.",
+          "var(--background-primary)"
+        );
+        navigate("/login");
+      }
 
       const booking: Booking = await bookEvent(event?.eventId, tickets);
       message =
