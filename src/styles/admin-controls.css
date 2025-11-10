@@ -23,10 +23,10 @@
   gap: 1rem;
 }
 
-.admin-section button {
+.admin-section .update-button {
   min-height: fit-content;
   padding: 2px;
-  line-height: 1.25rem;
+  line-height: 1rem;
 }
 
 @media only screen and (max-width: 780px) {
@@ -34,7 +34,7 @@
     flex-direction: column;
   }
 
-  .admin-section button {
+  .admin-section .update-button {
     width: 15rem;
     max-width: 100%;
     align-self: center;
