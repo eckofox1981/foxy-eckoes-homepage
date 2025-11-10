@@ -24,7 +24,7 @@
 }
 
 .admin-section .update-button {
-  min-height: fit-content;
+  min-height: 2.25rem;
   padding: 2px;
   line-height: 1rem;
 }
