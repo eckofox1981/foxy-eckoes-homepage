@@ -20,6 +20,8 @@ export const GET_USER_INFO_URL: string = "http://localhost:8080/user/info";
 
 export const REGISTER_USER_URL: string = "http://localhost:8080/user/create";
 
+export const UPDATE_USER_URL: string = "http://localhost:8080/user/update";
+
 export const GET_ALL_USERS_URL_ADMIN =
   "http://localhost:8080/user/get-all-usernames-and-id";
 

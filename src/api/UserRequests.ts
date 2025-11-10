@@ -5,6 +5,7 @@ import {
   GET_USER_INFO_URL,
   LOGIN_URL,
   REGISTER_USER_URL,
+  UPDATE_USER_URL,
 } from "./API_URLS";
 
 export async function login(username: string, password: string) {
@@ -97,6 +98,38 @@ export async function registerUser(
     );
     setToken(jwtToken);
     return "Registration completed, you are being directed to your account page.";
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+}
+
+export async function updateUser(user: User) {
+  try {
+    const response = await fetch(UPDATE_USER_URL, {
+      method: "PUT",
+      headers: {
+        Authorization: getToken() ?? "",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(user), //user can according to its class be null but this function cannot be called if it is
+    });
+
+    if (!response.ok) {
+      const message = await response.text();
+      throw new Error(message);
+    }
+
+    const json = await response.json();
+    return new User(
+      json.userId,
+      json.username,
+      json.firstName,
+      json.lastName,
+      json.email,
+      json.bookings,
+      json.role,
+      json.openIdProvider
+    );
   } catch (error: any) {
     throw new Error(error.message);
   }

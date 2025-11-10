@@ -10,12 +10,14 @@ import { UserBookings } from "../components/UserBookings";
 import { AdminControls } from "../components/AdminControls";
 import { useLoginBtnStore } from "../store/LoginBtnStore";
 import { useToastStore } from "../store/ToastStore";
+import { UserEditor } from "../components/modals/UserEditor";
 
 export function AccountPage() {
   const [user, setUser] = useState<User | null>(null);
   const setLoginBtnToLogin = useLoginBtnStore((store) => store.setToLogin);
   const showToast = useToastStore((store) => store.showToast);
   const navigate = useNavigate();
+  const [showUserEditor, setShowUserEditor] = useState<string>("hidden");
 
   const fetchUser = async () => {
     const token: string | undefined = getToken();
@@ -30,6 +32,7 @@ export function AccountPage() {
 
       return;
     }
+
     try {
       const fetched: User = await getUser(token);
       setUser(fetched);
@@ -55,6 +58,14 @@ export function AccountPage() {
       navigate("/");
     } else {
       return;
+    }
+  };
+
+  const handleEdit = () => {
+    if (showUserEditor === "hidden") {
+      setShowUserEditor("");
+    } else {
+      setShowUserEditor("hidden");
     }
   };
 
@@ -92,7 +103,10 @@ export function AccountPage() {
               </div>
             </div>
             <div>
-              <button className="menu-button">Edit</button> <br />
+              <button className="menu-button" onClick={handleEdit}>
+                Edit
+              </button>{" "}
+              <br />
               <button
                 className="cancel-button"
                 style={{ height: "3rem", fontSize: "1.25rem" }}
@@ -108,6 +122,12 @@ export function AccountPage() {
           {user.role === "admin" && <AdminControls />}
         </>
       )}
+      <UserEditor
+        show={showUserEditor}
+        close={handleEdit}
+        user={user}
+        refresh={fetchUser}
+      />
     </main>
   );
 }
