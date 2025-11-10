@@ -4,9 +4,11 @@ import { HeroSection } from "../components/Hero";
 import "../styles/home.css";
 import { getAllEvents } from "../api/EventRequests";
 import { Event } from "../models/Event";
+import { useToastStore } from "../store/ToastStore";
 
 export function Home() {
   const [events, setEvents] = useState<Event[]>([]);
+  const showToast = useToastStore((store) => store.showToast);
 
   useEffect(() => {
     const getEvents = async () => {
@@ -14,10 +16,7 @@ export function Home() {
         const fetched = await getAllEvents();
         setEvents(fetched);
       } catch (err: any) {
-        //TODO show toast
-        console.log("====================================");
-        console.log(err.message);
-        console.log("====================================");
+        showToast("Error loading events!", err.message, "red");
       }
     };
 
