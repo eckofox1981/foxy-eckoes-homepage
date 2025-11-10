@@ -142,7 +142,7 @@ export async function getAllUsers() {
     const response = await fetch(GET_ALL_USERS_URL_ADMIN, {
       method: "GET",
       headers: {
-        Authorization: getToken(),
+        Authorization: getToken() ?? "",
       },
     });
 

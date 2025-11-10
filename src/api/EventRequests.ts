@@ -131,7 +131,7 @@ export async function seatAvailibilityControl() {
       {
         method: "PUT",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
         },
       }
     );
@@ -154,7 +154,7 @@ export async function createEvent(newEvent: NewEvent) {
     const response = await fetch(CREATE_EVENT_URL_ADMIN, {
       method: "POST",
       headers: {
-        Authorization: getToken(),
+        Authorization: getToken() ?? "",
         "Content-type": "application/json",
       },
       body: JSON.stringify(newEvent),
@@ -180,7 +180,7 @@ export async function deleteEvent(eventID: string) {
       `${DELETE_EVENT_URL_ADMIN}?eventID=${eventID}`,
       {
         method: "DELETE",
-        headers: { Authorization: getToken() },
+        headers: { Authorization: getToken() ?? "" },
       }
     );
 
@@ -200,7 +200,7 @@ export async function updateEvent(event: Event) {
     const response = await fetch(UPDATE_EVENT_URL_ADMIN, {
       method: "PUT",
       headers: {
-        Authorization: getToken(),
+        Authorization: getToken() ?? "",
         "Content-type": "application/json",
       },
       body: JSON.stringify(event),

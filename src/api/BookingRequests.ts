@@ -15,7 +15,7 @@ export async function bookEvent(eventID: string, nbOfTickets: number) {
       {
         method: "POST",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
           "Content-type": "application/json",
         },
       }
@@ -49,7 +49,7 @@ export async function cancelBooking(bookingID: string) {
       {
         method: "PUT",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
         },
       }
     );
@@ -72,7 +72,7 @@ export async function updateBooking(bookingID: string, nbTickets: number) {
       {
         method: "PUT",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
         },
       }
     );
@@ -105,7 +105,7 @@ export async function getBookingsByUserId(userId: string) {
       {
         method: "GET",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
         },
       }
     );
@@ -116,7 +116,7 @@ export async function getBookingsByUserId(userId: string) {
     }
 
     const json = await response.json();
-    const bookings: Booking[] = json.map((b) => {
+    const bookings: Booking[] = json.map((b: Booking) => {
       return new Booking(
         b.bookingId,
         b.event,
@@ -140,7 +140,7 @@ export async function deleteBookingById(bookingId: string) {
       {
         method: "DELETE",
         headers: {
-          Authorization: getToken(),
+          Authorization: getToken() ?? "",
         },
       }
     );
