@@ -111,7 +111,7 @@ export async function updateUser(user: User) {
         Authorization: getToken() ?? "",
         "Content-type": "application/json",
       },
-      body: JSON.stringify(user), //user can according to its class be null but this function cannot be called if it is
+      body: JSON.stringify(user),
     });
 
     if (!response.ok) {
