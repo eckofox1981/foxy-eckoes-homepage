@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { Event } from "../models/Event";
 import { useEffect, useState } from "react";
 import "../styles/buttons.css";
@@ -6,7 +5,6 @@ import "../styles/event-page.css";
 import { useParams } from "react-router-dom";
 import { getEventById } from "../api/EventRequests";
 import { Bars } from "react-loader-spinner";
-import { Toast } from "../components/modals/Toast";
 import { convertDate } from "../utility/DateUtility";
 import type { Booking } from "../models/Booking";
 import { bookEvent } from "../api/BookingRequests";
@@ -14,12 +12,12 @@ import { useToastStore } from "../store/ToastStore";
 import { Tag } from "../components/Tag";
 
 export function EventPage() {
-  const eventId: string | undefined = useParams().id;
+  const eventId: string = useParams().id ?? "";
   const [event, setEvent] = useState<Event | null>(null);
   const showToast = useToastStore((store) => store.showToast);
 
   const fetchEvent = async () => {
-    const response: any = await getEventById(eventId);
+    const response: Event = await getEventById(eventId);
     return response;
   };
 

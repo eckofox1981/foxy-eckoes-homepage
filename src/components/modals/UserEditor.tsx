@@ -39,14 +39,14 @@ export function UserEditor({
   const handleSave = async () => {
     try {
       const updatedUser = new User(
-        user?.userID,
+        user?.userID || "",
         username,
         firstName,
         lastName,
         email,
-        user?.bookings,
-        user?.role,
-        user?.openIdProvider
+        user?.bookings || [],
+        user?.role || "",
+        user?.openIdProvider || ""
       );
       const confirmed = await updateUser(updatedUser);
       showToast(

@@ -24,19 +24,17 @@ export function EventEditor({
 }) {
   const [display, setDisplay] = useState<string>("hidden");
   const [isNew, setIsNew] = useState<boolean>(false);
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [performer, setPerformer] = useState<string | undefined>("");
-  const [description, setDescription] = useState<string | undefined>("");
-  const [location, setLocation] = useState<string | undefined>("");
-  const [pictureUrl, setPictureUrl] = useState<string | undefined>("");
-  const [tags, setTags] = useState<string[] | undefined>([]);
-  const [numberOfSeats, setNbOSeats] = useState<number | undefined>(0);
+  const [date, setDate] = useState<Date>(new Date());
+  const [performer, setPerformer] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [pictureUrl, setPictureUrl] = useState<string>("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [numberOfSeats, setNbOSeats] = useState<number>(0);
   const showToast = useToastStore((store) => store.showToast);
   const navigate = useNavigate();
   const event = useEventUpdateStore((store) => store.eventUpdate);
-  const setEvent = useEventUpdateStore((store) => store.setEventUpdate);
   const removeEvent = useEventUpdateStore((store) => store.removeEventUpdate);
-  const events = useEventListUpdateStore((store) => store.eventListUpdate);
   const setEvents = useEventListUpdateStore(
     (store) => store.setEventListUpdate
   );
@@ -113,7 +111,7 @@ export function EventEditor({
 
   const handleUpdate = async () => {
     const updatedEvent = new Event(
-      event.eventId,
+      event?.eventId ?? "",
       date,
       performer,
       description,
@@ -121,8 +119,8 @@ export function EventEditor({
       pictureUrl,
       tags,
       numberOfSeats,
-      event?.numberOfSeatsLeft,
-      event?.numberOfBookings
+      event?.numberOfSeatsLeft ?? numberOfSeats,
+      event?.numberOfBookings ?? 0
     );
 
     try {

@@ -2,14 +2,14 @@ import { useState } from "react";
 import { EventList } from "../components/Eventlist";
 import "../styles/buttons.css";
 import "../styles/events.css";
-import { EventFilterDTO } from "../models/Event";
+import { Event, EventFilterDTO } from "../models/Event";
 import { filterEvent } from "../api/EventRequests";
 import { useToastStore } from "../store/ToastStore";
 
 export function EventsPage() {
-  const [events, setEvents] = useState<Event[] | null>(null);
-  const [toDate, setToDate] = useState<Date>(undefined);
-  const [fromDate, setFromDate] = useState<Date>(undefined);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [toDate, setToDate] = useState<Date>(new Date());
+  const [fromDate, setFromDate] = useState<Date>(new Date());
   const [performer, setPerformer] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [tags, setTags] = useState<string>("");

@@ -36,7 +36,7 @@ export function AccountPage() {
     try {
       const fetched: User = await getUser(token);
       setUser(fetched);
-    } catch (error) {
+    } catch (error: any) {
       showToast(
         "Session expired:",
         "You might need to login again." + error.message,

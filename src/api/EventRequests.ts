@@ -1,4 +1,3 @@
-import { AdminEventCard } from "../components/AdminEventCard";
 import { getToken } from "../localstorage/Token";
 import {
   ControlReport,
@@ -13,7 +12,6 @@ import {
   FILTER_EVENT_URL,
   GET_ALL_EVENT_URL,
   GET_EVENT_BY_ID_URL,
-  UPDATE_BOOKING_URL,
   UPDATE_EVENT_URL_ADMIN,
 } from "./API_URLS";
 

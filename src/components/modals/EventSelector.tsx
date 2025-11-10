@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { useEffect, useState } from "react";
-import { Event } from "../../models/Event";
 import { getAllEvents } from "../../api/EventRequests";
 import { useToastStore } from "../../store/ToastStore";
 import { AdminEventCard } from "../AdminEventCard";
