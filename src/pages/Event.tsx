@@ -115,8 +115,8 @@ export function EventPage() {
           </section>
           <section className="tag-list">
             {event.tags !== null ? (
-              event.tags.map((t) => {
-                return <Tag tag={"#" + t} />;
+              event.tags.map((t, index) => {
+                return <Tag key={index} tag={"#" + t} />;
               })
             ) : (
               <p>No tags</p>
