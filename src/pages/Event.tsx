@@ -28,7 +28,7 @@ export function EventPage() {
   }, []);
 
   const handleBooking = async () => {
-    if (!getToken()) {
+    if (!getToken() || getToken() == undefined) {
       showToast(
         "Login",
         "You need to login first.",
@@ -49,15 +49,6 @@ export function EventPage() {
         return;
       } else if (tickets < 1) {
         throw Error("You need to enter a valid number of tickets.");
-      }
-
-      if (!getToken()) {
-        showToast(
-          "Login",
-          "You need to login first.",
-          "var(--background-primary)"
-        );
-        navigate("/login");
       }
 
       const booking: Booking = await bookEvent(event?.eventId, tickets);
