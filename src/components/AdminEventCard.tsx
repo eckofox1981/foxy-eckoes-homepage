@@ -20,7 +20,6 @@ export function AdminEventCard({
   const setEventUpdate = useEventUpdateStore((store) => store.setEventUpdate);
 
   const handleUpdate = () => {
-    console.log(JSON.stringify(event));
     setEventUpdate(event);
     showEventEditor();
   };

@@ -23,7 +23,7 @@ export function EventsPage() {
       location,
       tags.split(" ")
     );
-    console.log(JSON.stringify(filterDTO));
+
     try {
       const eventsReturned: Event[] = await filterEvent(filterDTO);
       setEvents(eventsReturned);

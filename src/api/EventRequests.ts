@@ -164,7 +164,6 @@ export async function createEvent(newEvent: NewEvent) {
     }
 
     const json = await response.json();
-    console.log("createEvent:" + json.eventId);
 
     return json.eventId;
   } catch (error: any) {

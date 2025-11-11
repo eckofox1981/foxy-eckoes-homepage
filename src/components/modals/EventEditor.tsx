@@ -40,8 +40,6 @@ export function EventEditor({
   );
 
   useEffect(() => {
-    console.log("Effect triggered - event:", event);
-
     if (event === null) {
       // New event - reset to defaults
       setIsNew(true);
@@ -94,7 +92,6 @@ export function EventEditor({
       tags,
       numberOfSeats
     );
-    console.log(JSON.stringify(event));
 
     try {
       const eventID = await createEvent(event);

@@ -32,7 +32,6 @@ export function LoginPage() {
       navigate("/account");
     } catch (e: any) {
       showToast("Could not log in", e.message, "var(--special-color)");
-      console.log(e.message);
     }
   };
 
