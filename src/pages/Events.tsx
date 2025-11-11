@@ -8,8 +8,8 @@ import { useToastStore } from "../store/ToastStore";
 
 export function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]);
-  const [toDate, setToDate] = useState<Date>(new Date());
-  const [fromDate, setFromDate] = useState<Date>(new Date());
+  const [toDate, setToDate] = useState<Date | null>(null);
+  const [fromDate, setFromDate] = useState<Date | null>(null);
   const [performer, setPerformer] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [tags, setTags] = useState<string>("");
@@ -89,7 +89,7 @@ export function EventsPage() {
           Filter
         </button>
       </section>
-      {events === null ? (
+      {events === null || events.length === 0 ? (
         <p>That search did not return any events</p>
       ) : (
         <EventList events={events} />

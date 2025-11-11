@@ -36,15 +36,15 @@ export class Event {
 }
 
 export class EventFilterDTO {
-  fromDate: Date;
-  toDate: Date;
+  fromDate: Date | null;
+  toDate: Date | null;
   performer: string;
   location: string;
   tags: string[];
 
   constructor(
-    fromDate: Date,
-    toDate: Date,
+    fromDate: Date | null,
+    toDate: Date | null,
     performer: string,
     location: string,
     tags: string[]
