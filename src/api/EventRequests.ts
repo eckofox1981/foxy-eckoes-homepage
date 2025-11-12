@@ -19,9 +19,6 @@ export async function getAllEvents() {
   try {
     const response = await fetch(GET_ALL_EVENT_URL, {
       method: "GET",
-      headers: {
-        CORS: "Access-control-Allow-Origin",
-      },
     });
 
     if (!response.ok) {
@@ -116,7 +113,7 @@ export async function filterEvent(filterDTO: EventFilterDTO) {
         )
     );
 
-    return events;
+    return events.sort((a, b) => a.date.getTime() - b.date.getTime());
   } catch (error: any) {
     throw new Error(error.message);
   }
