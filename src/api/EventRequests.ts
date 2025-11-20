@@ -113,7 +113,7 @@ export async function filterEvent(filterDTO: EventFilterDTO) {
         )
     );
 
-    return events.sort((a, b) => a.date.getTime() - b.date.getTime());
+    return events;
   } catch (error: any) {
     throw new Error(error.message);
   }
